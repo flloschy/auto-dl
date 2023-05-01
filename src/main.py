@@ -103,9 +103,8 @@ def download(ID, lengthCheck=True):
     try:
         debug("loading Youtube object", "")
         yt = pytube.YouTube(f"http://youtube.com/watch?v={ID}")
-    except Exception as ex:
+    except:
         fail()
-        debug("... " + ex)
         return False
     done()
 
@@ -122,9 +121,8 @@ def download(ID, lengthCheck=True):
     try:
         debug("downloading video", "")
         yt.streams.order_by("resolution").first().download(path, "video.mp4")
-    except Exception as ex:
+    except:
         fail()
-        debug("... " + ex)
         return False
     done()
 
@@ -132,9 +130,8 @@ def download(ID, lengthCheck=True):
     try:
         debug("downloading audio", "")
         yt.streams.get_audio_only().download(path, "audio.mp3")
-    except Exception as ex:
+    except:
         fail()
-        debug("... " + ex)
         return False
     done()
 
