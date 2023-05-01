@@ -1,0 +1,14 @@
+{
+    "folder": { 
+        "downloads": "./data/downloadedVideos",
+        "temporary": "./data/tmp"
+    },
+    "files": {
+        "channelList": "./data/channels.txt",
+        "downloadedList": "./data/downloaded.txt",
+        "waitList": "./data/waitlist.txt"
+    },
+    "instructions": "d w c w",
+    "waitTimeMinutes": 30,
+    "minimumVideoLengthSeconds": 1
+}

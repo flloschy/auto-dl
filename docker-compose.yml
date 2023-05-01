@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./data/waitlist.txt:/app/waitlist.txt
+      - ./data/channels.txt:/app/channels.txt
+      - ./data/downloaded.txt:/app/downloaded.txt
+      - ./data/tmp:/app/tmp
+      - ./data/downloadedVideos:/app/downloadedVideos
