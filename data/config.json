@@ -1,12 +1,12 @@
 {
     "folder": { 
-        "downloads": "./data/downloadedVideos",
-        "temporary": "./data/tmp"
+        "downloads": "./downloadedVideos",
+        "temporary": "./tmp"
     },
     "files": {
-        "channelList": "./data/channels.txt",
-        "downloadedList": "./data/downloaded.txt",
-        "waitList": "./data/waitlist.txt"
+        "channelList": "./channels.txt",
+        "downloadedList": "./downloaded.txt",
+        "waitList": "./waitlist.txt"
     },
     "instructions": "d w c w",
     "waitTimeMinutes": 30,

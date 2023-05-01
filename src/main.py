@@ -36,7 +36,7 @@ def loadConf():
     info("loading config", "")
 
     global waitTime, tmpFolder, dlFolder, chFile, dlFile, wlFile, instructions, minLength
-    conf = json.load(open("./data/config.json"))
+    conf = json.load(open("./config.json"))
     tmpFolder = conf["folder"]["temporary"]
     dlFolder = conf["folder"]["temporary"]
     chFile = conf["files"]["channelList"]
