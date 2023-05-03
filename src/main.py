@@ -120,7 +120,7 @@ def download(ID, lengthCheck=True):
 
     try:
         debug("downloading video", "")
-        yt.streams.order_by("resolution").first().download(path, "video.mp4")
+        yt.streams.order_by("resolution").last().download(path, "video.mp4")
     except:
         fail()
         return False
