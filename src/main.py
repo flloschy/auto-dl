@@ -38,7 +38,7 @@ def loadConf():
     global waitTime, tmpFolder, dlFolder, chFile, dlFile, wlFile, instructions, minLength
     conf = json.load(open("./config.json"))
     tmpFolder = conf["folder"]["temporary"]
-    dlFolder = conf["folder"]["temporary"]
+    dlFolder = conf["folder"]["downloads"]
     chFile = conf["files"]["channelList"]
     dlFile = conf["files"]["downloadedList"]
     wlFile = conf["files"]["waitList"]
@@ -137,7 +137,7 @@ def download(ID, lengthCheck=True):
 
 
     debug("combining video and audio", "") 
-    code = os.system(f'ffmpeg -i "{path}/video.mp4" -i "{path}/audio.mp3" -c:v copy -c:a aac -strict experimental "{dlFolder}/[{ID}].mp4" -loglevel quiet -y')
+    code = os.system(f'ffmpeg -i "{path}/video.mp4" -i "{path}/audio.mp3" -c:v copy -c:a aac -strict experimental {dlFolder}/[{ID}].mp4 -loglevel quiet -y')
 
     if code == 1:
         fail()
