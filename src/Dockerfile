@@ -1,14 +1,10 @@
-FROM python:3.9
+FROM node:16
 
 WORKDIR /app
 
-COPY main.py .
+COPY index.js .
 
-RUN apt update && apt install -y ffmpeg
-RUN pip install requests
-
-# fork by smartprocure because pytube has an error which isnt fixed yet
-RUN python -m pip install git+https://github.com/smartprocure/pytube
-### RUN python -m pip install git+https://github.com/pytube/pytube 
-
-CMD [ "python", "./main.py" ]
+# RUN apt update -y && apt upgrade -y
+RUN npm i ytdl-core@latest node-cron fluent-ffmpeg child_process
+ 
+CMD [ "node", "index.js" ]
