@@ -7,9 +7,8 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - ./data/config.json:/app/config.json
-      - ./data/waitlist.txt:/app/waitlist.txt
+      - ./data/downloadedVideos:/app/downloadedVideos
+      - ./data/tmp:/app/tmp
       - ./data/channels.txt:/app/channels.txt
       - ./data/downloaded.txt:/app/downloaded.txt
-      - ./data/tmp:/app/tmp
-      - ./data/downloadedVideos:/app/downloadedVideos
+      - ./data/waitlist.txt:/app/waitlist.txt
