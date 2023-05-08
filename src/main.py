@@ -99,7 +99,7 @@ def getLatestVideo(channel):
     done()
     return ID
 
-def download(ID, lengthCheck=True):
+def download(ID, channelName, lengthCheck=True):
     try:
         debug("loading Youtube object", "")
         yt = pytube.YouTube(f"http://youtube.com/watch?v={ID}")
@@ -111,6 +111,7 @@ def download(ID, lengthCheck=True):
     debug("checking video length", "")
     if (yt.length < minLength) and lengthCheck:
         fail()
+        open(dlFile, "a").write(ID + "\n")
         return False
     done()
 
@@ -135,9 +136,11 @@ def download(ID, lengthCheck=True):
         return False
     done()
 
+    if not os.path.exists(f"{dlFolder}/{channelName}"):
+        os.mkdir(f"{dlFolder}/{channelName}")
 
     debug("combining video and audio", "") 
-    code = os.system(f'ffmpeg -i "{path}/video.mp4" -i "{path}/audio.mp3" -c:v copy -c:a aac -strict experimental "{dlFolder}/[{ID}].mp4" -loglevel quiet -y')
+    code = os.system(f'ffmpeg -i "{path}/video.mp4" -i "{path}/audio.mp3" -c:v copy -c:a aac -strict experimental "{dlFolder}/{channelName}/S00E{len(os.listdir(f"{dlFolder}/{channelName}"))} [{ID}].mp4" -loglevel quiet -y')
 
     if code == 1:
         fail()
@@ -147,10 +150,10 @@ def download(ID, lengthCheck=True):
     return True
 
 def downloadFromChannelList():
-    channelList = [line.split(" - ")[0] for line in open(chFile, "r").read().splitlines()]
+    channelList = [line.split(" - ") for line in open(chFile, "r").read().splitlines()]
     downloaded = open(dlFile, "r").read()
-    for channel in channelList:
-        ID = getLatestVideo(channel)
+    for channelID, channelName in channelList:
+        ID = getLatestVideo(channelID)
         debug("validating video ID", "")
         if not ID:
             fail()
@@ -162,8 +165,8 @@ def downloadFromChannelList():
             continue
         done()
 
-        info(f"starting download for {ID} by {channel}")
-        if download(ID):
+        info(f"starting download for {ID} by {channelID}")
+        if download(ID, channelName):
             debug("adding ID to downloaded list", "")
             open(dlFile, "a").write(ID + "\n")
             done()
