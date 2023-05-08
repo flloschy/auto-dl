@@ -150,7 +150,7 @@ def download(ID, channelName, lengthCheck=True):
     return True
 
 def downloadFromChannelList():
-    channelList = [line.split(" - ") for line in open(chFile, "r").read().splitlines()]
+    channelList = [(line.split(" - ")[0], line.split(" - ")[1].replace(" ", "_")) for line in open(chFile, "r").read().splitlines()]
     downloaded = open(dlFile, "r").read()
     for channelID, channelName in channelList:
         ID = getLatestVideo(channelID)
@@ -177,9 +177,10 @@ def downloadFromChannelList():
 
 def downloadFromCustomList():
     waitlist = open(wlFile, "r").read().splitlines()
-    for ID in waitlist:
+    waitlist = [(x.split(" - ")[0], x.split(" - ")[1].replace(" ", "_")) for x in waitlist]
+    for ID, channel in waitlist:
         info(f"downloading {ID} from custom list")
-        if download(ID, False):
+        if download(ID, channel, False):
             debug("adding ID to downloaded list", "")
             open(dlFile, "a").write(ID + "\n")
             done()
