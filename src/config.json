@@ -10,5 +10,5 @@
     },
     "instructions": "d w c w",
     "waitTimeMinutes": 30,
-    "minimumVideoLengthSeconds": 1
+    "minimumVideoLengthSeconds": 100
 }
