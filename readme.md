@@ -1,5 +1,5 @@
-# Auto yt dl
-### Auto youtube downloader
+# Auto dl
+### Auto downloader
 
 ## instructions
 w = wait   
