@@ -3,12 +3,11 @@ version: "3"
 services:
   app:
     build:
-      context: ./src
+      context: ./code
       dockerfile: Dockerfile
     restart: always
+    ports:
+      - 3000:80
     volumes:
-      - ./data/downloadedVideos:/app/downloadedVideos
-      - ./data/tmp:/app/tmp
-      - ./data/channels.txt:/app/channels.txt
-      - ./data/downloaded.txt:/app/downloaded.txt
-      - ./data/waitlist.txt:/app/waitlist.txt
+      - ./code/data:/app/data
+    
