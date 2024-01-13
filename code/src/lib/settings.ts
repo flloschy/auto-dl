@@ -4,6 +4,7 @@ interface Settings {
 	autoDownloadingEnabled: boolean;
 	channelListIntervalTime: number;
 	waitListIntervalTime: number;
+    storagePercentPath:string;
 }
 
 export const getSettings = () => {
