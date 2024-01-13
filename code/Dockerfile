@@ -11,9 +11,10 @@ RUN python3 -m pip install requests --break-system-packages
 
 WORKDIR /app
 
+COPY . ./
+
 RUN npm install -g npm@latest
 RUN npm install
 
-COPY . ./
 
 CMD ["npm", "run", "start"]
