@@ -3,7 +3,7 @@ node_modules
 /build
 /.svelte-kit
 /package
-# .env
+.env
 .env.*
 !.env.example
 vite.config.js.timestamp-*
@@ -11,8 +11,8 @@ vite.config.ts.timestamp-*
 /downloader/__pycache__
 package-lock.json
 
-# /data/log.txt
-# /data/latest.txt
-# /data/settings.json
-# /data/waitlist.txt
-# /data/data.json
+/data/log.txt
+/data/latest.txt
+/data/settings.json
+/data/waitlist.txt
+/data/data.json
