@@ -13,7 +13,7 @@ RUN python3 -m pip install requests --break-system-packages
 WORKDIR /app
 
 COPY package.json ./
-RUN npm i
+RUN npm install
 COPY . ./
 
 RUN npm run build
