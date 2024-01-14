@@ -16,9 +16,9 @@ def runWaitlist():
                 pass
 
             # overwrite the file but remove the current line
-            with open("./data/waitlist.txt", "w") as f:
+            with open("./data/waitlist.txt", "w") as f2:
                 for line in f.read().splitlines():
                     if line != videoId:
-                        f.write(line)
+                        f2.write(line)
 
 if __name__ == '__main__': runWaitlist()
