@@ -8,14 +8,17 @@ def runWaitlist():
         for line in f.read().splitlines():
             videoId = re.search(regex, line).group(0)
             log(f"Waitlist: Downloading: {videoId}")
-            try: 
+            try:
                 main(videoId)
                 log(f"Done: Waitlist: Downloading: {videoId}")
             except Exception as e:
                 log(f"Error: Waitlist: Downloading: {videoId}: Downloader exited early: {e}")
                 pass
-            
-            with open("./data/waitlist.txt", "w") as f2:
-                f2.write("\n".join([line for line in f.read().replace(line, '').split('\n') if line.strip()]))
+
+            # overwrite the file but remove the current line
+            with open("./data/waitlist.txt", "w") as f:
+                for line in f.read().splitlines():
+                    if line != videoId:
+                        f.write(line)
 
 if __name__ == '__main__': runWaitlist()
