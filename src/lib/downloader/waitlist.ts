@@ -1,3 +1,4 @@
+import { getSettings } from '$lib/settings';
 import { spawn } from 'child_process';
 
 export function run() {
