@@ -57,7 +57,7 @@ export const addSeason = (
 		seasonNum:
 			Object.values(data[youtubeChannelId].seasons)
 				.map((season) => season.seasonNum)
-				.sort((a, b) => a - b)[0] + 1,
+				.sort((a, b) => b - a)[0] + 1,
 		seasonId: seasonId,
 		name: seasonName,
 		description: seasonDescription,

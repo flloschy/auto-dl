@@ -92,7 +92,7 @@ def main(videoId):
 
     episodeId = len(season['episodes'].keys())
 
-    locationFile = '/S' + str(season['seasonNum']).zfill(2) + 'E' + str(episodeId).zfill(2) + ' [' + videoId + '].' + ('mp3' if channel['audioOnly']  else 'mp4')
+    locationFile = '/' + channel['name'] + ' S' + str(season['seasonNum']).zfill(2) + 'E' + str(episodeId).zfill(2) + ' [' + videoId + '].' + ('mp3' if channel['audioOnly']  else 'mp4')
 
     tmpVideoPath = f"./data/temp/video{videoId}.mp4"
     tmpAudioPath = f"./data/temp/audio{videoId}.mp3"
