@@ -1,4 +1,4 @@
-import { setSettings } from '$lib/settings';
+import { getSettings, setSettings } from '$lib/settings';
 
 export const POST = async ({ request }) => {
 	const { autoInterval, waitlistInterval, toggle } = await request.json();
@@ -6,6 +6,7 @@ export const POST = async ({ request }) => {
 		autoDownloadingEnabled: toggle,
 		waitListIntervalTime: waitlistInterval,
 		channelListIntervalTime: autoInterval,
+        storagePercentPath: getSettings().storagePercentPath
 	});
 	return new Response('OK');
 };
