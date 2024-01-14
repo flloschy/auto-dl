@@ -1,4 +1,5 @@
 FROM node:latest
+ENV NODE_ENV=production 
 
 RUN apt update
 
@@ -11,10 +12,9 @@ RUN python3 -m pip install requests --break-system-packages
 
 WORKDIR /app
 
+COPY package.json ./
+RUN npm i
 COPY . ./
 
-RUN npm install -g npm@latest
-RUN npm install
-
-
+RUN npm run build
 CMD ["npm", "run", "start"]
