@@ -1,5 +1,6 @@
 import { getData, setData } from '$lib/data/access';
 import fs from 'node:fs';
+import { cachedDataVersionTag } from 'node:v8';
 /**
  * @param channelId
  * @param newChannelName
@@ -22,10 +23,14 @@ export const updateChannel = (
 	if (names.includes(newChannelName)) return false;
 
     if (data[channelId].name != newChannelName) {
-        fs.renameSync(
-        `./data/videos/${data[channelId].name}`,
-        `./data/videos/${newChannelName}`,
-    );
+        try {
+            fs.renameSync(
+            `./data/videos/${data[channelId].name}`,
+            `./data/videos/${newChannelName}`,
+            );
+        } catch (e) {
+            console.log(e)
+        }
     }
 
 	data[channelId].name = newChannelName;
