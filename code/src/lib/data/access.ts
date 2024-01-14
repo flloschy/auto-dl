@@ -1,5 +1,5 @@
 import type { Data } from '$lib/data/interfaces';
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 
 export const getData = (): Data => {
 	return JSON.parse(

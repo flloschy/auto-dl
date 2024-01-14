@@ -1,5 +1,5 @@
 import { validYtURL } from '$lib/helper';
-import { appendFileSync } from 'fs';
+import { appendFileSync } from 'node:fs';
 
 /**
  *

@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 export const getWaitlist = () =>
 	readFileSync('./data/waitlist.txt', { encoding: 'utf-8' }).split('\n');
 

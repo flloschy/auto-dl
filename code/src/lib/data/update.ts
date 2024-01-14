@@ -1,5 +1,5 @@
 import { getData, setData } from '$lib/data/access';
-import fs from 'fs';
+import fs from 'node:fs';
 /**
  * @param channelId
  * @param newChannelName

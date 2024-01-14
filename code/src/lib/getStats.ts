@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 import { getData } from '$lib/data/access';
 import { totalmem, freemem, cpuUsage } from 'os-utils';
 import checkDiskSpace from 'check-disk-space';
@@ -57,7 +57,7 @@ export async function getCPUusage() {
 export async function getStorageUsage() {
 	async function sub() {
 		return await new Promise((resolve) => {
-			checkDiskSpace(getSettings().storagePercentPath).then((diskSpace) => {
+			checkDiskSpace('/').then((diskSpace) => {
 				resolve(
 					((diskSpace.size - diskSpace.free) / diskSpace.size) * 100,
 				);

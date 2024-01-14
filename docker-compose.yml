@@ -5,9 +5,11 @@ services:
     build:
       context: ./code
       dockerfile: Dockerfile
-    restart: always
+    restart: unless-stopped
     ports:
       - 5002:3000
     volumes:
       - ./code/data:/app/data
-    
+    environment:
+      - ORIGIN=http(s)://your.domain
+      - ADMIN_AUTH=username:password

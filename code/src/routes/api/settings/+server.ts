@@ -5,8 +5,7 @@ export const POST = async ({ request }) => {
 	setSettings({
 		autoDownloadingEnabled: toggle,
 		waitListIntervalTime: waitlistInterval,
-		channelListIntervalTime: autoInterval,
-        storagePercentPath: getSettings().storagePercentPath
+		channelListIntervalTime: autoInterval
 	});
 	return new Response('OK');
 };

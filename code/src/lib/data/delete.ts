@@ -1,5 +1,5 @@
 import { getData, setData } from '$lib/data/access';
-import fs from 'fs';
+import fs from 'node:fs';
 
 export const deleteChannel = (channelId: string) => {
 	const data = getData();
