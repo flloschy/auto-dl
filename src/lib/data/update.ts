@@ -37,8 +37,6 @@ export const updateChannel = (
 	data[channelId].description = newChannelDescription;
 	data[channelId].automaticDownloading = automaticDownloading;
 	data[channelId].audioOnly = audioOnly;
-
-    console.log(data[channelId].description)
         
 	setData(data);
 	return true;
