@@ -1,8 +1,9 @@
+import { getSettings } from '$lib/settings';
 import { spawn } from 'child_process';
 
 export function run() {
 	console.log('Running Channellist');
-	spawn('D:/python11/python.exe', [
+	spawn(getSettings().pythonCommand, [
 		'./downloader/channellistRunner.py',
 	])
     .on('close', () => console.log("close"))

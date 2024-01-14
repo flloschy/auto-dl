@@ -57,7 +57,7 @@ export async function getCPUusage() {
 export async function getStorageUsage() {
 	async function sub() {
 		return await new Promise((resolve) => {
-			checkDiskSpace('C:/').then((diskSpace) => {
+			checkDiskSpace(getSettings().systemRoot).then((diskSpace) => {
 				resolve(
 					((diskSpace.size - diskSpace.free) / diskSpace.size) * 100,
 				);
