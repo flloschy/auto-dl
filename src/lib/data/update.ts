@@ -19,10 +19,10 @@ export const updateChannel = (
 	const data = getData();
 	if (!data[channelId]) return false;
 
-	const names = Object.values(data).map((channel) => channel.name);
-	if (names.includes(newChannelName)) return false;
-
+    
     if (data[channelId].name != newChannelName) {
+        const names = Object.values(data).map((channel) => channel.name);
+        if (names.includes(newChannelName)) return false;
         try {
             fs.renameSync(
             `./data/videos/${data[channelId].name}`,
