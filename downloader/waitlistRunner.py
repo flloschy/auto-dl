@@ -11,8 +11,8 @@ def runWaitlist():
             try: 
                 main(videoId)
                 log(f"Done: Waitlist: Downloading: {videoId}")
-            except:
-                log(f"Error: Waitlist: Downloading: {videoId}: Downloader exited early")
+            except Exception as e:
+                log(f"Error: Waitlist: Downloading: {videoId}: Downloader exited early: {e}")
                 pass
             
             with open("./data/waitlist.txt", "w") as f2:

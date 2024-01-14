@@ -22,8 +22,8 @@ def runChannellist():
                 try:
                     main(videoId)
                     log(f"Done: Channellist: Downloading: {videoId}")
-                except:
-                    log(f"Error: Channellist: Downloading: {videoId}: Downloader exited early")
+                except Exception as e:
+                    log(f"Error: Channellist: Downloading: {videoId}: Downloader exited early: {e}")
                 
     log("Done: Running: Channellist")
                 

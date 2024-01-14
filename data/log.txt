@@ -1,1 +1,7 @@
 Welcome to AutoDl!
+1705253007 # Logger started
+1705253038 # Logger started
+1705253057 # Waitlist: Downloading: AZtQ79h_NtU
+1705253057 # Downloading: AZtQ79h_NtU
+1705253357 # Done: Downloading: AZtQ79h_NtU
+1705253357 # Done: Waitlist: Downloading: AZtQ79h_NtU

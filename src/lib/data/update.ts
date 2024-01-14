@@ -21,16 +21,20 @@ export const updateChannel = (
 	const names = Object.values(data).map((channel) => channel.name);
 	if (names.includes(newChannelName)) return false;
 
-	fs.renameSync(
-		`./data/videos/${data[channelId].name}`,
-		`./data/videos/${newChannelName}`,
-	);
+    if (data[channelId].name != newChannelName) {
+        fs.renameSync(
+        `./data/videos/${data[channelId].name}`,
+        `./data/videos/${newChannelName}`,
+    );
+    }
 
 	data[channelId].name = newChannelName;
 	data[channelId].description = newChannelDescription;
 	data[channelId].automaticDownloading = automaticDownloading;
 	data[channelId].audioOnly = audioOnly;
 
+    console.log(data[channelId].description)
+        
 	setData(data);
 	return true;
 };
