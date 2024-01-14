@@ -4,8 +4,8 @@ RUN apt update && apt install -y python3 \
         python3-pip \
         ffmpeg
 
-RUN python3 -m pip install git+https://github.com/pytube/pytube
-RUN python3 -m pip install requests
+RUN python3 -m pip install git+https://github.com/pytube/pytube --break-system-packages
+RUN python3 -m pip install requests --break-system-packages
 
 WORKDIR /app
 
