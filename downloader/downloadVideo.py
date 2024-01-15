@@ -48,17 +48,27 @@ def create_directory(path):
     if not os.path.exists(path):
         os.mkdir(path)
 
-def add_video(data, yt:pytube.YouTube, episodeId, videoPath, season):
-    video =  {
+
+def add_video(data,
+              yt: pytube.YouTube,
+              episodeId,
+              videoPath,
+              season,
+              audioOnly=False):
+    video = {
         "episodeId": episodeId,
         "name": yt.title,
         "youtubeLink": yt.watch_url,
         "videoId": yt.video_id,
         "length": yt.length,
-        "size": int(os.path.getsize(videoPath) / 1024 ** 2),
-        "downloadDate": int(time.time())
+        "size": int(os.path.getsize(videoPath) / 1024**2),
+        "downloadDate": int(time.time()),
+        "audioOnly": audioOnly
     }
-    data[yt.channel_id]['seasons'][season['seasonId']]['episodes'][yt.video_id] = video
+    data[yt.channel_id]['seasons'][season['seasonId']]['episodes'][
+        yt.video_id] = video
+    data[yt.channel_id]['seasons'][season['seasonId']]['updated'] = int(
+        time.time())
     save_data(data)
 
 
@@ -107,7 +117,7 @@ def main(videoId):
                                              f"audio{videoId}.mp3")
     else:
         yt.streams.get_audio_only().download(locationPath, locationFile)
-        add_video(data, yt, episodeId, locationPath + locationFile, season)
+        add_video(data, yt, episodeId, locationPath + locationFile, season, True)
         log(f"Done: Downloading: {videoId}")
         exit(0)
 

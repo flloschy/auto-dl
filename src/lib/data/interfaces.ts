@@ -6,6 +6,7 @@ export interface Episode {
 	length: number;
 	size: number;
 	downloadDate: number;
+    audioOnly: boolean;
 }
 
 export interface Episodes {

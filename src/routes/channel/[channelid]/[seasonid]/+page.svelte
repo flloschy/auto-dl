@@ -45,6 +45,18 @@
 				>Delete</button
 			>
 		</div>
+        <form method="post" action="?/swap" class="gridoverwrite">
+            <input hidden value="{previewData.videoId}" name="from">
+            Swap with<select name="to">
+                {#each Object.values(data.episodes) as episode}
+                    {#if episode.episodeId != previewData.episodeId}
+                        <option value={episode.videoId}>{episode.episodeId} - {episode.name}</option>
+                    {:else}
+                        <option value={episode.videoId} disabled>{episode.episodeId} - {episode.name}</option>
+                    {/if}
+                {/each}
+            </select><button disabled={Object.values(data.episodes).length == 1}>Swap</button>
+        </form>
 	{/if}
 </Modal>
 
@@ -210,6 +222,14 @@
 </div>
 
 <style>  
+
+    .gridoverwrite {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        width: min-content;
+        margin-top: 20px;
+    }
+
 	.center {
 		justify-self: center;
 	}

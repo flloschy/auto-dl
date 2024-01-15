@@ -1,6 +1,6 @@
 import { getChannel } from '$lib/data/access';
 import { deleteEpisode, deleteSeason } from '$lib/data/delete';
-import { updateSeason } from '$lib/data/update';
+import { swapVideos, updateSeason } from '$lib/data/update';
 import { error, type Actions } from '@sveltejs/kit';
 
 export function load({ params }) {
@@ -52,4 +52,10 @@ export const actions: Actions = {
 			throw error(401, 'Channel or Season does not exist');
 		}
 	},
+    swap: async ({ request, params }) => {
+        const channelid = params.channelid as string;
+        const seasonkey = params.seasonid as string;
+        const data = await request.formData();
+        swapVideos(channelid, seasonkey, data.get('from') as string, data.get('to') as string)
+    }
 };

@@ -251,3 +251,24 @@ input {
 	overflow: hidden;
 	white-space: nowrap;
 }
+
+
+select {
+    background-color: var(--bgat);
+    color: var(--t);
+    outline: none;
+    border: none;
+    padding: 2px;
+    margin-left: 5px;
+    border-radius: 10px;
+}
+
+option {
+    background-color: var(--bg);
+    color: var(--t);
+    outline: none;
+    border: none;
+    padding: 2px;
+    margin-left: 5px;
+    border-radius: 10px;
+}
