@@ -100,8 +100,6 @@ def main(videoId):
 
     tmpVideoPath = f"./data/temp/video{videoId}.mp4"
     tmpAudioPath = f"./data/temp/audio{videoId}.mp3"
-    print(season)
-    exit(1)
     if not channel['audioOnly']:
         yt.streams.order_by('resolution').last().download(
             "./data/temp/", f"video{videoId}.mp4")
