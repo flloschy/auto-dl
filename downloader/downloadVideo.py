@@ -103,7 +103,7 @@ def main(videoId):
 
     episodeId = len(season['episodes'].keys())
 
-    locationFile = '/' + channel['name'] + ' S' + str(
+    locationFile = '/S' + str(
         season['seasonNum']).zfill(2) + 'E' + str(episodeId).zfill(
             2) + ' [' + videoId + '].' + ('mp3'
                                           if channel['audioOnly'] else 'mp4')
