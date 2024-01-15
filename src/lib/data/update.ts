@@ -100,7 +100,7 @@ export const swapVideos = (
     
     const seasonPath = `./data/videos/${data[ChannelId].name}/Season ${episode1SeasonNum}/`;
     
-    const fileExtension = season.episodes[episodeId1].audioOnly ? '.mp3' : '.mp4';
+    const fileExtension = season.episodes[episodeId1].audioOnly ? 'mp3' : 'mp4';
     
     fs.renameSync(
         `${seasonPath}${episode1Identifier} [${episodeId1}].${fileExtension}`,
