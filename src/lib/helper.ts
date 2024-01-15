@@ -34,6 +34,12 @@ export function genId(existingIds: string[]) {
 	return idToTest;
 }
 
+export function getNextAvailableNum(existingNums: number[]) {
+    let numToTest = 1;
+    while (existingNums.includes(numToTest)) numToTest++;
+    return numToTest;
+}
+
 export function formatDuration(
 	seconds: number,
 	differenceSinceNow: boolean = false,

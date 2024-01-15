@@ -29,7 +29,7 @@ def get_channel(data, yt):
                 'description': 'the place where videos end up when no other seasons regex gets triggerd',
                 'regex': '.*',
                 'updated': -1,
-                'deletable': False, 
+                'deletable': False,
                 'episodes': {}
             }
         }
@@ -76,7 +76,8 @@ def main(videoId):
     save_data(data)
 
     if videoId in "".join(os.listdir("./data/temp/")):
-        log(f"Error: Downloading: {videoId}: Video already in download process")
+        log(f"Error: Downloading: {videoId}: Video already in download process"
+            )
         raise FileExistsError("Video already in download process")
 
     if videoId in open("./data/data.json").read():
@@ -92,22 +93,29 @@ def main(videoId):
 
     episodeId = len(season['episodes'].keys())
 
-    locationFile = '/' + channel['name'] + ' S' + str(season['seasonNum']).zfill(2) + 'E' + str(episodeId).zfill(2) + ' [' + videoId + '].' + ('mp3' if channel['audioOnly']  else 'mp4')
+    locationFile = '/' + channel['name'] + ' S' + str(
+        season['seasonNum']).zfill(2) + 'E' + str(episodeId).zfill(
+            2) + ' [' + videoId + '].' + ('mp3'
+                                          if channel['audioOnly'] else 'mp4')
 
     tmpVideoPath = f"./data/temp/video{videoId}.mp4"
     tmpAudioPath = f"./data/temp/audio{videoId}.mp3"
-
+    print(season)
+    exit(1)
     if not channel['audioOnly']:
-        yt.streams.order_by('resolution').last().download("./data/temp/", f"video{videoId}.mp4")
-        yt.streams.get_audio_only().download("./data/temp/", f"audio{videoId}.mp3")
-    else: 
+        yt.streams.order_by('resolution').last().download(
+            "./data/temp/", f"video{videoId}.mp4")
+        yt.streams.get_audio_only().download("./data/temp/",
+                                             f"audio{videoId}.mp3")
+    else:
         yt.streams.get_audio_only().download(locationPath, locationFile)
         add_video(data, yt, episodeId, locationPath + locationFile, season)
         log(f"Done: Downloading: {videoId}")
         exit(0)
 
-
-    code = os.system(f'ffmpeg -i "{tmpVideoPath}" -i "{tmpAudioPath}" -c:v copy -c:a aac -strict experimental "{locationPath}{locationFile}" -loglevel quiet -y')
+    code = os.system(
+        f'ffmpeg -i "{tmpVideoPath}" -i "{tmpAudioPath}" -c:v copy -c:a aac -strict experimental "{locationPath}{locationFile}" -loglevel quiet -y'
+    )
     if not channel['audioOnly']:
         os.remove(tmpVideoPath)
         os.remove(tmpAudioPath)

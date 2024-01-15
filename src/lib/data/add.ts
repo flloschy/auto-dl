@@ -1,4 +1,4 @@
-import { genId } from '$lib/helper';
+import { genId, getNextAvailableNum } from '$lib/helper';
 import { type Season, type Channel, emptySeason } from '$lib/data/interfaces';
 import { getData, setData } from '$lib/data/access';
 
@@ -55,9 +55,8 @@ export const addSeason = (
 	const seasonId = genId(keys);
 	const season: Season = {
 		seasonNum:
-			Object.values(data[youtubeChannelId].seasons)
-				.map((season) => season.seasonNum)
-				.sort((a, b) => b - a)[0] + 1,
+			getNextAvailableNum(Object.values(data[youtubeChannelId].seasons)
+				.map((season) => season.seasonNum)),
 		seasonId: seasonId,
 		name: seasonName,
 		description: seasonDescription,
