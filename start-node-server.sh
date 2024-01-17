@@ -1,3 +1,3 @@
 #!/bin/bash
-npm run build >> ./logs/node.log 2>&1
-node -r dotenv/config build >> ./logs/node.log 2>&1
+$(which npm) run build >> ./logs/node.log 2>&1
+$(which node) -r dotenv/config build >> ./logs/node.log 2>&1
