@@ -1,3 +1,4 @@
+#!/bin/bash
 pkill -f start-node-server.sh
 pkill -f start-python-runner.sh
 
