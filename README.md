@@ -21,8 +21,13 @@
     - set the `ORIGIN` to the domain form the the webUI will be accessed from. This is required because else `POST` request wont be able to execute - which are required for key functionality -
 7.  Install all npm packages
     - `npm install`
-  
-8. At this point everything is ready to run. Though i assume you want this to start whenever your server boots up
+
+8. Give everyone permissions to execute the `.sh` files
+    - `chmod +x start.sh`
+    - `chmod +x start-node-server.sh`
+    - `chmod +x start-python-runner.sh`
+
+9.  At this point everything is ready to run. Though i assume you want this to start whenever your server boots up
     - `crontab -e`
     - Add a new line `@reboot sh </your/desired/parent/path>/auto-dl/start.sh`
     - reboot your server
