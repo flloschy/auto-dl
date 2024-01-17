@@ -22,10 +22,8 @@
 7.  Install all npm packages
     - `npm install`
 
-8. Give everyone permissions to execute the `.sh` files
+8. Give the execution permissions to the `start.sh` file
     - `chmod +x start.sh`
-    - `chmod +x start-node-server.sh`
-    - `chmod +x start-python-runner.sh`
 
 9.  At this point everything is ready to run. Though i assume you want this to start whenever your server boots up
     - `crontab -e`
