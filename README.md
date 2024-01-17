@@ -1,24 +1,30 @@
-# This is *still* not fully tested
+# This is *still* not fully tested nor fully feature complete
 
 # installation
 
-1. preinstalling stuff
-   1. `apt install python3 python3-pip ffmpeg`
-   2. `python -m pip install git+https://github.com/pytube/pytube`
-2. go to your desired destination, eg. `cd ~`
-3. `git clone https://github.com/flloschy/auto-dl.git`
-4. edit `data/settings.json`
-   1. change `systemRoot` to a path you want, eg. `~/auto-dl`
-   2. change `pythonCommand` if your python *cant* be called by `python3`
-5. edit `.env`
-   1. `ADMIN_AUTH=username:password` this will be your login, eg. `ADMIN_AUTH=admin:securePassword1234`
-   2. `PORT=5002` this will be the port the site will be hosted on, i use 5002 because it fits my port selection scheme 
-   3. `ORIGN=http(s)://your.domain` this must fit to the origin your request will come form. eg. `https://downloader.example.com`, if not set no post request will be allowed which are required for full functionality 
-6. `npm install`
-7. `npm run start`
+1. Install required packages
+    - `apt install git python3 python3-pip ffmpeg`
+    - `python3 -m pip install git+https://github.com/pytube/pytube`
+2. Got/Create your desired parent path
+    - `cd </your/desired/parent/path>`
+3.  Clone the downloader
+    - `git clone https://github.com/flloschy/auto-dl.git`
+4.  Go into the downloader
+    - `cd auto-dl`
+5.  Configure your settings
+    - `nano data/settings.json`
+    - change `systemRoot` to the path which will be used to calculate the storage usage
+6.  Configure your env
+    - `nano .env`
+    - set a username and password for Authentifikation (`ADMIN_AUTH`) replace `username` and `password` with their respective values
+    - set a port the web server should be bound on (`port`). (I use 5002 because it fits in my port naming convention of my server)
+    - set the `ORIGIN` to the domain form the the webUI will be accessed from. This is required because else `POST` request wont be able to execute - which are required for key functionality -
+7.  Install all npm packages
+    - `npm install`
+  
+8. At this point everything is ready to run. Though i assume you want this to start whenever your server boots up
+    - `crontab -e`
+    - Add a new line `@reboot sh </your/desired/parent/path>/auto-dl/start.sh`
+    - reboot your server
 
-But now you must keep your terminal open
-I use crontab to start this process automatically on boot
-via. `@reboot cd ~/auto-dl && npm run start`
-
-and everything *should* work
+And now the web interface *should* be reachable and the python "backend" *should* be running too
