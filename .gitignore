@@ -9,4 +9,4 @@ vite.config.ts.timestamp-*
 /downloader/__pycache__
 package-lock.json
 
-/data/videos/
+/data
