@@ -7,5 +7,4 @@ chmod +x ./start-node-server.sh
 chmod +x ./start-python-runner.sh
 chmod +x ./start.sh
 
-./start-node-server.sh &
-./start-python-runner.sh &
+./start-node-server.sh & ./start-python-runner.sh &
