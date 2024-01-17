@@ -29,7 +29,7 @@
 
 9.  At this point everything is ready to run. Though i assume you want this to start whenever your server boots up
     - `crontab -e`
-    - Add a new line `@reboot cd </your/desired/parent/path> && </your/desired/patent/path>/auto-dl/start.sh >> </your/desired/patent/path>/auto-dl/logs/start.log 2>&1`
+    - Add a new line `@reboot cd </your/desired/parent/path>/auto-dl && ./start.sh >> ./logs/start.log 2>&1`
     - `reboot now`
 
 And now the web interface *should* be reachable and the python "backend" *should* be running too
