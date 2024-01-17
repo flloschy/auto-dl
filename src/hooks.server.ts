@@ -3,6 +3,7 @@ import { env } from '$env/dynamic/private';
 import { redirect, type Handle } from '@sveltejs/kit';
 
 const auth: Handle = async ({ event, resolve }) => {
+    if (event.route.id == "/health") return await resolve(event)
 	if (!env.ADMIN_AUTH) {
 		return new Response('Not authorized, no ADMIN_AUTH', {
 			status: 401,
