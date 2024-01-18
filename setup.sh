@@ -1,3 +1,7 @@
+#!/bin/bash
+
+mkdir ./data
+
 touch ./data/data.json
 echo "{}" > ./data/data.json
 
