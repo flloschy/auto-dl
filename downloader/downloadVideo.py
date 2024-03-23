@@ -103,13 +103,13 @@ def main(videoId):
 
     episodeId = len(season['episodes'].keys())
 
-    locationFile = '/S' + str(
-        season['seasonNum']).zfill(2) + 'E' + str(episodeId).zfill(
-            2) + ' [' + videoId + '].' + ('mp3'
-                                          if channel['audioOnly'] else 'mp4')
+    locationFile = '/S' + str(season['seasonNum']).zfill(2) + 'E' + str(
+        episodeId).zfill(2) + ' [' + videoId + '].' + (
+            'mp3' if channel['audioOnly'] else 'mp4')
 
     tmpVideoPath = f"./data/temp/video{videoId}.mp4"
     tmpAudioPath = f"./data/temp/audio{videoId}.mp3"
+
     if not channel['audioOnly']:
         yt.streams.order_by('resolution').last().download(
             "./data/temp/", f"video{videoId}.mp4")
@@ -117,7 +117,8 @@ def main(videoId):
                                              f"audio{videoId}.mp3")
     else:
         yt.streams.get_audio_only().download(locationPath, locationFile)
-        add_video(data, yt, episodeId, locationPath + locationFile, season, True)
+        add_video(data, yt, episodeId, locationPath + locationFile, season,
+                  True)
         log(f"Done: Downloading: {videoId}")
         exit(0)
 
