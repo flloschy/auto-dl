@@ -5,6 +5,7 @@ import type { Actions } from '@sveltejs/kit';
 
 export async function load() {
 	return {
+		ip: await (await fetch('https://dynamicdns.park-your-domain.com/getip')).text(),
 		system: getStats(),
 		settings: getSettings(),
 	};

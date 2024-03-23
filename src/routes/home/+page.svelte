@@ -123,6 +123,12 @@
 				<td>Storage</td>
 				<td><strong data-p>{storage.toFixed(1)}%</strong></td>
 			</tr>
+			<tr>
+				<td>IP</td>
+				<td>
+					{data.ip}
+				</td>
+			</tr>
 		</table>
 	</div>
 	<div class="systemstats">
@@ -245,35 +251,35 @@
 			'serverstats systemstats downloaderstats'
 			'settings settings actions';
 	}
-    
-    @media screen and (max-width: 550px) {
-        .container {
-            grid-template-columns: auto auto;
-            grid-template-rows: auto auto auto;
-            grid-template-areas:
-                'serverstats systemstats'
-                'downloaderstats downloaderstats'
-                'settings actions';
-        }
-    }
-    @media screen and (max-width: 450px) {
-        .container {
-            grid-template-columns: auto;
-            grid-template-rows: auto auto auto auto auto auto;
-            grid-template-areas:
-                'serverstats'
-                'systemstats'
-                'downloaderstats'
-                'downloaderstats'
-                'settings'
-                'actions';
-        }
-        .modalgrid {
-            display: grid;
-            grid-template-columns: 1fr;
-            column-gap: 10px;
-	    }
-    }
+
+	@media screen and (max-width: 550px) {
+		.container {
+			grid-template-columns: auto auto;
+			grid-template-rows: auto auto auto;
+			grid-template-areas:
+				'serverstats systemstats'
+				'downloaderstats downloaderstats'
+				'settings actions';
+		}
+	}
+	@media screen and (max-width: 450px) {
+		.container {
+			grid-template-columns: auto;
+			grid-template-rows: auto auto auto auto auto auto;
+			grid-template-areas:
+				'serverstats'
+				'systemstats'
+				'downloaderstats'
+				'downloaderstats'
+				'settings'
+				'actions';
+		}
+		.modalgrid {
+			display: grid;
+			grid-template-columns: 1fr;
+			column-gap: 10px;
+		}
+	}
 	.serverstats {
 		grid-area: serverstats;
 	}
