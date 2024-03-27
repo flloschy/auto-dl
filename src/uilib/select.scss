@@ -1,0 +1,30 @@
+select {
+	padding: 10px;
+	border-radius: 10px;
+	background-color: var(--primary);
+	outline: none;
+	border: none;
+	box-shadow:
+		5px 5px 10px rgba(255, 255, 255, 0.1) inset,
+		-5px -5px 10px rgba(0, 0, 0, 0.2) inset;
+
+	transition:
+		box-shadow 500ms ease-out,
+		transform 250ms cubic-bezier(0, 1.47, 0.55, 1.54);
+}
+
+select:hover {
+	z-index: 999;
+	transform: scale(1.05);
+}
+select:focus {
+	box-shadow:
+		-5px -5px 10px rgba(255, 255, 255, 0.4) inset,
+		5px 5px 10px rgba(0, 0, 0, 0.5) inset;
+
+	transform: scale(0.95);
+
+	transition:
+		box-shadow 50ms ease-out,
+		transform 250ms cubic-bezier(0, 1.47, 0.55, 1.54);
+}

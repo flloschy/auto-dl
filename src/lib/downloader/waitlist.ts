@@ -1,16 +1,16 @@
-import { getSettings } from '$lib/settings';
-import { spawn } from 'child_process';
+const filePath = 'src/lib/database/functions/channels.ts';
 
-export function run() {
-	console.log('Running Waitlist');
-	spawn(getSettings().pythonCommand, [
-		'./downloader/waitlistRunner.py',
-	])
-    .on('close', () => console.log("close"))
-    .on('exit', () => console.log("exit"))
-    .on('error', (e) => console.log(e))
-    .on('disconnect', () => console.log("disconnect"))
-    .on('message', (m) => console.log(m))
-    .on('spawn', () => console.log("spawn"))
-        
+import { logInfo } from '$lib/database/functions/logs';
+import { getWaitlist, remWaitlist } from '$lib/database/functions/waitlist';
+import { download } from './download';
+
+export async function waitList() {
+	logInfo('running waitlist', '', filePath, 'waitList');
+
+	for (const videoId of getWaitlist()) {
+		await download(videoId);
+		remWaitlist(videoId);
+	}
+
+	logInfo('running waitlist done', '', filePath, 'waitList');
 }

@@ -1,18 +1,17 @@
-import { getWaitlist } from '$lib/waitlist/access';
-import { appendWaitlist } from '$lib/waitlist/append';
+import { getWaitlist, remWaitlist } from '$lib/database/functions/waitlist';
 import type { Actions } from '@sveltejs/kit';
 
-export async function load() {
-	return { lines: getWaitlist() };
-}
+export const load = async () => {
+	return {
+		videos: getWaitlist()
+	};
+};
 
 export const actions: Actions = {
 	default: async ({ request }) => {
 		const data = await request.formData();
-		const youtubeURL = data.get('url') as string;
-		if (appendWaitlist(youtubeURL)) {
-			return { success: true, t: Date.now() };
-		}
-		return { success: false, t: Date.now() };
-	},
+		const id = data.get('id');
+		if (!id) return;
+		remWaitlist(id as string);
+	}
 };
