@@ -165,6 +165,21 @@ What is this Button? Well...
 
 The way the downloading Interval works is that a value gets increased by one every hour until the desired hours are reached. This Button will set this value back to 0.
 
+# Upgrade
+
+## Docker
+
+1. `sudo docker-compose down`
+2. `git pull`
+3. `sudo docker-compose up -d --build`
+4. < Remove fragments from old build >
+
+## Manual
+
+1. < stop process >
+2. `git pull`
+3. < start process >
+
 # Import / Export
 
 I dont know how stable this feature is when there is a huge amount of database entries.
