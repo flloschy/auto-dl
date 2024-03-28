@@ -17,7 +17,6 @@ logSetup('done', '', filePath, '');
 
 export async function handle({ event, resolve }) {
 	if (event.url.pathname == '/health') {
-		logDebug('health Request', 'ok', filePath, 'handle');
 		return new Response('ok');
 	}
 	if (event.url.pathname == '/logout') {
