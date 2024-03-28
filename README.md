@@ -28,6 +28,10 @@ Automatic video downloader compatible with [Jellyfin](https://jellyfin.org/) and
 2. Set a username and password
    - edit `/src/lib/settings.ts`
    - change `username` and `password`
+3. (optional) add a discord webhook
+   - create a webhook in your discord server
+   - edit `/src/lib/settings.ts`
+   - change paste the url into `webhook`
 
 ## Docker
 
@@ -229,6 +233,10 @@ ask any creators for permission before downloading any of their content. And eve
 ## Logs
 
 ![logs screenshot](/readme/logs.png)
+
+## Webhook
+
+![discord webhook screenshot](/readme/webhook.png)
 
 # Development environment
 
