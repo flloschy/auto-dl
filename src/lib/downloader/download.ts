@@ -5,8 +5,58 @@ import { logDebug, logInfo, logWarning } from '$lib/database/functions/logs';
 import { getSeasonFromTitle } from '$lib/database/functions/seasons';
 import { getVideoNum, setVideo, videoExists } from '$lib/database/functions/videos';
 import type { Video, YoutubeId } from '$lib/database/tables/videos';
+import { formatDuration, formatSize } from '$lib/helper';
+import { webhook } from '$lib/settings';
 import { exec } from 'child_process';
 import { statSync } from 'node:fs';
+
+function sendWebhook(video:Video) {
+	if (webhook.length == 0) return
+
+	fetch(webhook, {
+		method:'post',
+		headers: {"Content-Type": "application/json"},
+		body: JSON.stringify({
+			"embeds": [
+				{
+				"title": video.title,
+				"color": 3459607,
+				"fields": [
+					{
+					"name": "Season",
+					"value": video.season.name,
+					"inline": true
+					},
+					{
+					"name": "Number",
+					"value": '`' + video.num + '`',
+					"inline": true
+					},
+					{
+						"name": "",
+						"value": "",
+						"inline": false
+					},
+					{
+					"name": "Length",
+					"value": '`' + formatDuration(video.length) + '`',
+					"inline": true
+					},
+					{
+					"name": "Size",
+					"value": '`' + formatSize(video.size) + '`',
+					"inline": true
+					}
+				],
+				"author": {
+					"name": video.channel.displayName
+				},
+				"timestamp": video.time.toISOString()
+				}
+			]
+		})
+	})
+}
 
 const execute = async (command: string) =>
 	await new Promise<string>((resolve) => {
@@ -71,6 +121,6 @@ export async function download(videoId: YoutubeId) {
 	};
 
 	setVideo(video);
-
+	sendWebhook(video)
 	logInfo('downloaded Video', `id: ${video.id}; title: ${video.title}`, filePath, 'download');
 }
