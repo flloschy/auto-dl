@@ -16,7 +16,11 @@ initCronjob();
 logSetup('done', '', filePath, '');
 
 export async function handle({ event, resolve }) {
-	if (event.url.pathname == '/health') {
+	if (
+		event.url.pathname == '/health' ||
+		event.url.pathname == "/robots.txt" ||
+		event.url.pathname == 'favicon.png'
+	) {
 		return new Response('ok');
 	}
 	if (event.url.pathname == '/logout') {
@@ -30,7 +34,7 @@ export async function handle({ event, resolve }) {
 	const pwd = event.cookies.get('password');
 
 	if (user != username || pwd != password) {
-		logWarning('access denied', `user: ${user}; password: ${pwd}`, filePath, '');
+		logWarning('access denied', `path: ${event.url.pathname}; user: ${user}; password: ${pwd};`, filePath, '');
 		event.cookies.delete('username', { path: '/' });
 		event.cookies.delete('password', { path: '/' });
 		if (event.url.pathname != '/login') return redirect(301, '/login');

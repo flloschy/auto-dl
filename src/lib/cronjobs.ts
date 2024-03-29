@@ -8,10 +8,7 @@ import { logDebug, logSetup } from './database/functions/logs';
 export function initCronjob() {
 	const ticker = schedule(`0 0 * * * *`, () => {
 		logDebug('cron tick', '', filePath, 'initCronjob/ticker');
-		if (stepTick()) {
-			logDebug('scheduled channelList execution', '', filePath, 'initCronjob/ticker');
-			channelList();
-		}
+		if (stepTick())	channelList();
 	});
 	ticker.start();
 	logSetup('Hourly Cronjob started', '', filePath, 'initCronjob');
