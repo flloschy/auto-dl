@@ -10,8 +10,9 @@ RUN apt-get install -y ffmpeg
 RUN python3 -m pip install yt-dlp --break-system-packages
 
 # build
-COPY . /app
+COPY ./package.json ./package.json
 RUN npm i
+COPY . .
 RUN npm run build
 
 # run
