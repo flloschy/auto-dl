@@ -7,11 +7,11 @@ export const actions: Actions = {
 		const data = await request.formData();
 		const link = data.get('link');
 		if (!link) return;
-		let output =
+		const output =
 			await execute(
 				`yt-dlp --flat-playlist --print id "${link}"`
 			);
-		let ids = output.split("\n");
+		const ids = output.split("\n");
 		ids.forEach((id) => id ? addWaitlist(id.trim()) : null);
 	}
 };
