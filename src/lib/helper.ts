@@ -1,3 +1,5 @@
+import { exec } from "node:child_process";
+
 export function formatSize(KiloBytes: number) {
 	const megaBytes = KiloBytes / 1000;
 	if (megaBytes < 1024) return `${megaBytes}MB`;
@@ -58,3 +60,13 @@ export function overlapObjects<T extends object>(o1: T, o2: Partial<T>): T {
 
 	return ob;
 }
+
+export const execute = async (command: string) =>
+	await new Promise<string>((resolve) => {
+		let out = '';
+		exec(command, (_, stdout) => {
+			out = stdout;
+		})
+			.on('error', (err) => console.error(err))
+			.on('exit', () => setTimeout(() => resolve(out), 500));
+	});

@@ -5,9 +5,8 @@ import { logDebug, logInfo, logWarning } from '$lib/database/functions/logs';
 import { getSeasonFromTitle } from '$lib/database/functions/seasons';
 import { getVideoNum, setVideo, videoExists } from '$lib/database/functions/videos';
 import type { Video, YoutubeId } from '$lib/database/tables/videos';
-import { formatDuration, formatSize } from '$lib/helper';
+import { execute, formatDuration, formatSize } from '$lib/helper';
 import { webhook } from '$lib/settings';
-import { exec } from 'child_process';
 import { statSync } from 'node:fs';
 
 function sendWebhook(video: Video) {
@@ -58,15 +57,7 @@ function sendWebhook(video: Video) {
 	})
 }
 
-export const execute = async (command: string) =>
-	await new Promise<string>((resolve) => {
-		let out = '';
-		exec(command, (_, stdout) => {
-			out = stdout;
-		})
-			.on('error', (err) => console.error(err))
-			.on('exit', () => setTimeout(() => resolve(out), 500));
-	});
+
 
 export async function download(videoId: YoutubeId) {
 	if (videoExists(videoId)) {
