@@ -91,7 +91,6 @@ export async function download(videoId: YoutubeId) {
 
 	const length = parseFloat(
 		await execute(
-			// get lenght of Video fo
 			`ffprobe -i "${path}/${file}.webm" -show_entries format=duration -v quiet -of csv="p=0"`
 		)
 	);
