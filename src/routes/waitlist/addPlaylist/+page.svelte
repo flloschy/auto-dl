@@ -14,6 +14,3 @@
 		<input type="submit" value="Append" />
 	</form>
 </div>
-
-<style>
-</style>
