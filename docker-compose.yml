@@ -10,3 +10,4 @@ services:
       - ./data:/app/data
     ports:
       - 3000:3000
+    restart: 'unless-stoped'
