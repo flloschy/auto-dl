@@ -12,23 +12,23 @@
 				type="text"
 				value={data.video.title}
 				name="title"
-				style="width: 100%; font-size: 2.369rem"
+				style="width: 100%; font-size: 2.369rem; text-align:center"
 			/>
 		</form>
 		<div class="center-container">
 			<form class="values-list" method="post" action="?/transfer">
+				<div>Date</div>
+				<code>{data.video.time.toLocaleDateString()}</code>
+				<div>Time</div>
+				<code>{data.video.time.toLocaleTimeString()}</code>
 				<div>Length</div>
 				<code>{formatDuration(data.video.length)}</code>
 				<div>Size</div>
 				<code>{formatSize(data.video.size)}</code>
-				<div>Date</div>
-				<code>{data.video.time.toLocaleDateString()}</code>
 				<div>ID</div>
 				<code>{data.video.id}</code>
 				<div>Number</div>
 				<code>{data.video.num}</code>
-				<div>Time</div>
-				<code>{data.video.time.toLocaleTimeString()}</code>
 				<select name="target">
 					<option disabled>{data.video.season.name}</option>
 					{#each data.seasons as season}
