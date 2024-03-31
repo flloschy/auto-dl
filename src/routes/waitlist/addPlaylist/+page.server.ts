@@ -1,5 +1,5 @@
 import { addWaitlist } from '$lib/database/functions/waitlist';
-import { execute } from '$lib/helper';
+import { execute } from '$lib/downloader/download';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {

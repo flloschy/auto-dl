@@ -5,9 +5,21 @@ import { logCritical, logDebug, logInfo, logWarning } from '$lib/database/functi
 import { getSeasonFromTitle } from '$lib/database/functions/seasons';
 import { getVideoNum, setVideo, videoExists } from '$lib/database/functions/videos';
 import type { Video, YoutubeId } from '$lib/database/tables/videos';
-import { execute, formatDuration, formatSize } from '$lib/helper';
+import { formatDuration, formatSize } from '$lib/helper';
 import { webhook } from '$lib/settings';
+import { exec } from 'child_process';
 import { statSync } from 'node:fs';
+
+export const execute = async (command: string) =>
+	await new Promise<string>((resolve) => {
+		let out = '';
+		exec(command, (_, stdout) => {
+			out = stdout;
+		})
+			.on('error', (err) => console.error(err))
+			.on('exit', () => setTimeout(() => resolve(out), 500));
+	});
+
 
 function sendWebhook(video: Video) {
 	if (webhook.length == 0) return;
