@@ -23,7 +23,7 @@ export function getChannelByName(channelName: string) {
 export function addChannel(id: string, name: string, description: string) {
 	if (channels.keyArray().includes(id)) return 'Channel ID exists already';
 	if (channels.find((channel) => channel.displayName == name)) return 'Channel Name already exists';
-	const path = name.trim().replaceAll('/', '').replaceAll(' ', '-');
+	const path = name.trim();
 	try {
 		fs.mkdirSync('./data/downloads/' + path);
 	} catch {
@@ -56,7 +56,7 @@ export function editChannel(data: { id: string } & Partial<Channel>) {
 
 	if (channel.displayName != newChannel.displayName) {
 		// @ts-expect-error when the displayName gets updated, it must exist
-		newChannel.path = data.displayName.trim().replaceAll('/', '').replaceAll(' ', '-');
+		newChannel.path = data.displayName.trim();
 		try {
 			fs.renameSync('./data/downloads/' + channel.path, './data/downloads/' + newChannel.path);
 		} catch {
