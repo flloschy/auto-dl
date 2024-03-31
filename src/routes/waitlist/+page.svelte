@@ -8,7 +8,9 @@
 	<h2>Waitlist</h2>
 	<div class="grid">
 		<button data-green on:click={() => goto('/waitlist/addVideos')}> Add Video </button>
-		<button data-green on:click={() => goto('/waitlist/addPlaylist')} style="margin-top: 5px"> Add Playlist</button>
+		<button data-green on:click={() => goto('/waitlist/addPlaylist')} style="margin-top: 5px">
+			Add Playlist</button
+		>
 		{#each data.videos as video}
 			<form method="post">
 				<input type="hidden" name="id" value={video} />
@@ -23,7 +25,6 @@
 	.grid {
 		align-content: center;
 		display: grid;
-
 	}
 	form {
 		display: flex;

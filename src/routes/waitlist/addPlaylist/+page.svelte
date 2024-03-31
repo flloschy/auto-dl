@@ -5,11 +5,15 @@
 		in the Database<br />with the correct Display Name!
 	</p>
 	<form method="post">
-		<input id="linkInput" name="link" type="text" placeholder="https://www.youtube.com/playlist?list=PLCiNIjl_KpQhFwQA3G19w1nmhEOlZQsGF" />
+		<input
+			id="linkInput"
+			name="link"
+			type="text"
+			placeholder="https://www.youtube.com/playlist?list=PLCiNIjl_KpQhFwQA3G19w1nmhEOlZQsGF"
+		/>
 		<input type="submit" value="Append" />
 	</form>
 </div>
 
 <style>
-
 </style>

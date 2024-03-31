@@ -10,54 +10,52 @@ import { webhook } from '$lib/settings';
 import { statSync } from 'node:fs';
 
 function sendWebhook(video: Video) {
-	if (webhook.length == 0) return
+	if (webhook.length == 0) return;
 
 	fetch(webhook, {
 		method: 'post',
-		headers: { "Content-Type": "application/json" },
+		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
-			"embeds": [
+			embeds: [
 				{
-					"title": video.title,
-					"color": 3459607,
-					"fields": [
+					title: video.title,
+					color: 3459607,
+					fields: [
 						{
-							"name": "Season",
-							"value": video.season.name,
-							"inline": true
+							name: 'Season',
+							value: video.season.name,
+							inline: true
 						},
 						{
-							"name": "Number",
-							"value": '`' + video.num + '`',
-							"inline": true
+							name: 'Number',
+							value: '`' + video.num + '`',
+							inline: true
 						},
 						{
-							"name": "",
-							"value": "",
-							"inline": false
+							name: '',
+							value: '',
+							inline: false
 						},
 						{
-							"name": "Length",
-							"value": '`' + formatDuration(video.length) + '`',
-							"inline": true
+							name: 'Length',
+							value: '`' + formatDuration(video.length) + '`',
+							inline: true
 						},
 						{
-							"name": "Size",
-							"value": '`' + formatSize(video.size) + '`',
-							"inline": true
+							name: 'Size',
+							value: '`' + formatSize(video.size) + '`',
+							inline: true
 						}
 					],
-					"author": {
-						"name": video.channel.displayName
+					author: {
+						name: video.channel.displayName
 					},
-					"timestamp": video.time.toISOString()
+					timestamp: video.time.toISOString()
 				}
 			]
 		})
-	})
+	});
 }
-
-
 
 export async function download(videoId: YoutubeId) {
 	if (videoExists(videoId)) {
@@ -113,6 +111,6 @@ export async function download(videoId: YoutubeId) {
 	};
 
 	setVideo(video);
-	sendWebhook(video)
+	sendWebhook(video);
 	logInfo('downloaded Video', `id: ${video.id}; title: ${video.title}`, filePath, 'download');
 }
