@@ -10,6 +10,7 @@ Automatic video downloader compatible with [Jellyfin](https://jellyfin.org/) and
 2. Download the latest video from a channel on a interval
 3. Download videos from a video ID list
 4. Move videos between Seasons
+5. Download Playlists
 
 # Stack
 
@@ -149,13 +150,23 @@ Info: New Channels are by default excluded from auto downloading
    1. Select a new season (the big blue select option (looks like a button))
    2. Press the `Transfer` Button
 
-## Add to Waitlist
+## Add to Waitlist (video)
 
 1. Go to `Waitlist`
-2. Click `Add to Waitlist`
+2. Click `Add Video`
 3. Enter Video Id
    - NEEDS to be JUST the ID, not the url/link!
 4. CLick `Append`
+
+Important: In order for a video to be downloaded, the [Channel](#add-a-channel) MUST exist with the CORRECT channel name, else a video cant be assigned to a channel and thus wont be downloaded.
+
+## Add to Waitlist (playlist)
+
+1. Go to `Waitlist`
+2. Click `Add Playlist`
+3. Enter playlist link
+   - unlike the video waitlist this NEEDS to be a valid playlist url like `https://www.youtube.com/playlist?list=PLCiNIjl_KpQhFwQA3G19w1nmhEOlZQsGF`
+4. Click `Append`
 
 Important: In order for a video to be downloaded, the [Channel](#add-a-channel) MUST exist with the CORRECT channel name, else a video cant be assigned to a channel and thus wont be downloaded.
 
@@ -169,10 +180,9 @@ The way the downloading Interval works is that a value gets increased by one eve
 
 ## Docker
 
-1. `sudo docker-compose down`
-2. `git pull`
-3. `sudo docker-compose up -d --build`
-4. < Remove fragments from old build >
+1. `git pull`
+2. `sudo docker-compose up -d --build`
+3. (optional) Remove fragments from old build >
 
 ## Manual
 
