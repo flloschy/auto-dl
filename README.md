@@ -178,6 +178,8 @@ The way the downloading Interval works is that a value gets increased by one eve
 
 # Upgrade
 
+In case `git pull` doesn't work, delete the problematic file (most likely src/lib/settings.ts) but make sure to copy/save it first, then try to pull again, and overwrite the file if needed.
+
 ## Docker
 
 1. `git pull`
