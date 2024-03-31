@@ -209,9 +209,8 @@ This is ONLY an emergency option in case the database gets messed up / desynced 
 
 ## VERY IMPORTANT
 
-I know placing something important this far down is nothing good but thats a you problem, again :D (only if you didnt scroll here)
-
-NO and I mean NOT A SINGLE button has ANY kind of confirmation. So a delete button WILL execute the deleting with NO way back, NO backups NO anything!
+1. I know placing something important this far down is nothing good but thats a you problem, again :D (only if you didnt scroll here). NO and I mean NOT A SINGLE button has ANY kind of confirmation. So a delete button WILL execute the deleting with NO way back, NO backups NO anything!
+2. DO not, NEVER, NEVER EVER click the `Run Waitlist` or `Run Channellist` button more than once! There is NO protection against ANY problems that may accrue so just dont and wait. This will cause more trouble than speed things up.
 
 # File Layout
 
