@@ -1,7 +1,7 @@
 const filePath = 'src/lib/downloader/download.ts';
 
 import { getChannelByName } from '$lib/database/functions/channels';
-import { logCritical, logDebug, logError, logInfo, logWarning } from '$lib/database/functions/logs';
+import { logCritical, logDebug, logInfo, logWarning } from '$lib/database/functions/logs';
 import { getSeasonFromTitle } from '$lib/database/functions/seasons';
 import { getVideoNum, setVideo, videoExists } from '$lib/database/functions/videos';
 import type { Video, YoutubeId } from '$lib/database/tables/videos';
