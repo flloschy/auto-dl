@@ -77,27 +77,29 @@
 		>
 	</div>
 	{#if data.songs.length != 0}
-		<form method="post" action="?/updateLyrics">
-			<h1 class="text-lg font-bold">Metadata</h1>
-			<Separator />
-			<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
-				{#each Object.entries(data.songs[selectedIndex]) as [key, stat]}
-					<p>{key}</p>
-					<p>{stat}</p>
-				{/each}
-				<button
-					class="col-span-2 bg-red-700 p-2 rounded-xl animation text-primary-200"
-					on:click|preventDefault={() => (deleteDialog = true)}>Delete</button
+		<div>
+			<form method="post" action="?/updateLyrics" class="sticky top-0">
+				<h1 class="text-lg font-bold">Metadata</h1>
+				<Separator />
+				<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
+					{#each Object.entries(data.songs[selectedIndex]) as [key, stat]}
+						<p>{key}</p>
+						<p>{stat}</p>
+					{/each}
+					<button
+						class="col-span-2 bg-red-700 p-2 rounded-xl animation text-primary-200"
+						on:click|preventDefault={() => (deleteDialog = true)}>Delete</button
+					>
+				</div>
+				<Separator />
+				<h1 class="text-lg font-bold mb-2">Lyrics</h1>
+				<textarea placeholder="[00:00:00.00] text" name="lyrics" class="w-[100%]" rows="20"
+					>{lyrics}</textarea
 				>
-			</div>
-			<Separator />
-			<h1 class="text-lg font-bold mb-2">Lyrics</h1>
-			<textarea placeholder="[00:00:00.00] text" name="lyrics" class="w-[100%]" rows="20"
-				>{lyrics}</textarea
-			>
-			<input type="hidden" value={data.songs[selectedIndex].location} name="path" />
-			<button class="w-[100%] p-2 bg-background-800 rounded-xl animation">Update Lyrics</button>
-		</form>
+				<input type="hidden" value={data.songs[selectedIndex].location} name="path" />
+				<button class="w-[100%] p-2 bg-background-800 rounded-xl animation">Update Lyrics</button>
+			</form>
+		</div>
 	{/if}
 </div>
 

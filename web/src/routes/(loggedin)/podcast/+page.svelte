@@ -63,43 +63,45 @@
 	</div>
 	{#if data.podcasts.length != 0}
 		<div>
-			<h1 class="text-lg font-bold">Metadata</h1>
-			<Separator />
-			<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
-				<p>Title</p>
-				<input
-					bind:value={data.podcasts[selectedIndex].nfo.title}
-					class="animation"
-					on:keypress={onlyAscii}
-					placeholder="title"
-				/>
-				<p>Description</p>
-				<textarea
-					class="animation"
-					bind:value={data.podcasts[selectedIndex].nfo.plot}
-					on:keypress={onlyAscii}
-				/>
-				<p>Added</p>
-				<DateInput
-					bind:value={data.podcasts[selectedIndex].nfo.dateadded}
-					class="animation bg-background-800"
-				/>
-				<button
-					class="col-span-2 bg-background-700 p-2 rounded-xl animation text-primary-200"
-					on:click={() => document.getElementById('saveButton')?.click()}>Save Metadata</button
-				>
-				<button
-					class="col-span-2 bg-red-700 p-2 rounded-xl animation text-primary-200"
-					on:click={() => (deleteDialog = true)}>Delete</button
-				>
-			</div>
-			<h1 class="text-lg font-bold pt-3">Stats</h1>
-			<Separator />
-			<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0">
-				{#each Object.entries(data.podcasts[selectedIndex].stats) as [key, stat]}
-					<p>{key}</p>
-					<p>{stat}</p>
-				{/each}
+			<div class="sticky top-0">
+				<h1 class="text-lg font-bold">Metadata</h1>
+				<Separator />
+				<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
+					<p>Title</p>
+					<input
+						bind:value={data.podcasts[selectedIndex].nfo.title}
+						class="animation"
+						on:keypress={onlyAscii}
+						placeholder="title"
+					/>
+					<p>Description</p>
+					<textarea
+						class="animation"
+						bind:value={data.podcasts[selectedIndex].nfo.plot}
+						on:keypress={onlyAscii}
+					/>
+					<p>Added</p>
+					<DateInput
+						bind:value={data.podcasts[selectedIndex].nfo.dateadded}
+						class="animation bg-background-800"
+					/>
+					<button
+						class="col-span-2 bg-background-700 p-2 rounded-xl animation text-primary-200"
+						on:click={() => document.getElementById('saveButton')?.click()}>Save Metadata</button
+					>
+					<button
+						class="col-span-2 bg-red-700 p-2 rounded-xl animation text-primary-200"
+						on:click={() => (deleteDialog = true)}>Delete</button
+					>
+				</div>
+				<h1 class="text-lg font-bold pt-3">Stats</h1>
+				<Separator />
+				<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0">
+					{#each Object.entries(data.podcasts[selectedIndex].stats) as [key, stat]}
+						<p>{key}</p>
+						<p>{stat}</p>
+					{/each}
+				</div>
 			</div>
 		</div>
 	{/if}

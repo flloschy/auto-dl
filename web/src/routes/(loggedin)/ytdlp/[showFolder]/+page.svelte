@@ -86,53 +86,55 @@
 
 	{#if data.seasons.length != 0}
 		<div>
-			<h1 class="text-lg font-bold">Metadata</h1>
-			<Separator />
-			<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
-				<p>Title</p>
-				<input
-					placeholder="title"
-					bind:value={data.seasons[selectedIndex].nfo.title}
-					class="animation"
-					on:keypress={onlyAscii}
-				/>
-				<p>Description</p>
-				<textarea
-					placeholder="description"
-					class="animation"
-					bind:value={data.seasons[selectedIndex].nfo.plot}
-					on:keypress={onlyAscii}
-				/>
-				<p>Added</p>
-				<DateInput
-					bind:value={data.seasons[selectedIndex].nfo.dateadded}
-					class="animation bg-background-800"
-				/>
+			<div class="sticky top-0">
+				<h1 class="text-lg font-bold">Metadata</h1>
+				<Separator />
+				<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
+					<p>Title</p>
+					<input
+						placeholder="title"
+						bind:value={data.seasons[selectedIndex].nfo.title}
+						class="animation"
+						on:keypress={onlyAscii}
+					/>
+					<p>Description</p>
+					<textarea
+						placeholder="description"
+						class="animation"
+						bind:value={data.seasons[selectedIndex].nfo.plot}
+						on:keypress={onlyAscii}
+					/>
+					<p>Added</p>
+					<DateInput
+						bind:value={data.seasons[selectedIndex].nfo.dateadded}
+						class="animation bg-background-800"
+					/>
 
-				<p>Trailer ID</p>
-				<input
-					bind:value={data.seasons[selectedIndex].nfo.trailer}
-					on:keypress={onlyAscii}
-					placeholder="trailer youtube-ID"
-				/>
-				<button
-					class="col-span-2 bg-background-700 p-2 rounded-xl animation text-primary-200"
-					on:click={() => document.getElementById('saveButton')?.click()}>Save Metadata</button
-				>
-				<button
-					class="col-span-2 bg-red-700 p-2 rounded-xl animation text-primary-200"
-					on:click={() => (deleteDialog = true)}>Delete</button
-				>
-			</div>
-			<h1 class="text-lg font-bold pt-3">Stats</h1>
-			<Separator />
-			<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0">
-				{#each Object.entries(data.seasons[selectedIndex].stats) as [key, stat]}
-					<p>{key}</p>
-					<p>{stat}</p>
-				{/each}
-				<p>Season Num</p>
-				<p>{selectedIndex + 1}</p>
+					<p>Trailer ID</p>
+					<input
+						bind:value={data.seasons[selectedIndex].nfo.trailer}
+						on:keypress={onlyAscii}
+						placeholder="trailer youtube-ID"
+					/>
+					<button
+						class="col-span-2 bg-background-700 p-2 rounded-xl animation text-primary-200"
+						on:click={() => document.getElementById('saveButton')?.click()}>Save Metadata</button
+					>
+					<button
+						class="col-span-2 bg-red-700 p-2 rounded-xl animation text-primary-200"
+						on:click={() => (deleteDialog = true)}>Delete</button
+					>
+				</div>
+				<h1 class="text-lg font-bold pt-3">Stats</h1>
+				<Separator />
+				<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0">
+					{#each Object.entries(data.seasons[selectedIndex].stats) as [key, stat]}
+						<p>{key}</p>
+						<p>{stat}</p>
+					{/each}
+					<p>Season Num</p>
+					<p>{selectedIndex + 1}</p>
+				</div>
 			</div>
 		</div>
 	{/if}

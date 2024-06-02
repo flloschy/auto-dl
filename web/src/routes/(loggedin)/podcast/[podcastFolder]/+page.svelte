@@ -100,66 +100,68 @@
 		>
 	</div>
 
-	<div>
-		{#if data.files.length != 0}
-			<!-- Metadata Inspector  -->
-			<h1 class="text-lg font-bold">Metadata</h1>
-			<Separator />
-			<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
-				<p>Title</p>
-				<input
-					bind:value={data.files[selectedIndex].nfo.title}
-					class="animation"
-					placeholder="Title"
-				/>
-				<p>Description</p>
-				<textarea
-					class="animation"
-					bind:value={data.files[selectedIndex].nfo.plot}
-					placeholder="Description"
-				/>
-				<p>Released</p>
-				<DateInput
-					bind:value={data.files[selectedIndex].nfo.aired}
-					class="animation bg-background-800"
-				/>
-				<p>Added</p>
-				<DateInput
-					bind:value={data.files[selectedIndex].nfo.dateadded}
-					class="animation bg-background-800"
-				/>
-				<p>Video ID</p>
-				<input
-					bind:value={data.files[selectedIndex].nfo.youtubemetadataid}
-					placeholder="video Id"
-				/>
-				<p>Added</p>
-				<DateInput
-					bind:value={data.files[selectedIndex].nfo.dateadded}
-					class="animation bg-background-800"
-				/>
-				<button
-					class="col-span-2 bg-background-700 p-2 rounded-xl animation text-primary-200"
-					on:click={() => document.getElementById('saveButton')?.click()}>Save Metadata</button
-				>
-				<button
-					class="col-span-2 bg-red-700 p-2 rounded-xl animation text-primary-200"
-					on:click={() => (deleteDialog = true)}>Delete</button
-				>
+	{#if data.files.length != 0}
+		<div>
+			<div class="sticky top-0">
+				<!-- Metadata Inspector  -->
+				<h1 class="text-lg font-bold">Metadata</h1>
+				<Separator />
+				<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-3">
+					<p>Title</p>
+					<input
+						bind:value={data.files[selectedIndex].nfo.title}
+						class="animation"
+						placeholder="Title"
+					/>
+					<p>Description</p>
+					<textarea
+						class="animation"
+						bind:value={data.files[selectedIndex].nfo.plot}
+						placeholder="Description"
+					/>
+					<p>Released</p>
+					<DateInput
+						bind:value={data.files[selectedIndex].nfo.aired}
+						class="animation bg-background-800"
+					/>
+					<p>Added</p>
+					<DateInput
+						bind:value={data.files[selectedIndex].nfo.dateadded}
+						class="animation bg-background-800"
+					/>
+					<p>Video ID</p>
+					<input
+						bind:value={data.files[selectedIndex].nfo.youtubemetadataid}
+						placeholder="video Id"
+					/>
+					<p>Added</p>
+					<DateInput
+						bind:value={data.files[selectedIndex].nfo.dateadded}
+						class="animation bg-background-800"
+					/>
+					<button
+						class="col-span-2 bg-background-700 p-2 rounded-xl animation text-primary-200"
+						on:click={() => document.getElementById('saveButton')?.click()}>Save Metadata</button
+					>
+					<button
+						class="col-span-2 bg-red-700 p-2 rounded-xl animation text-primary-200"
+						on:click={() => (deleteDialog = true)}>Delete</button
+					>
+				</div>
+				<h1 class="text-lg font-bold pt-3">Stats</h1>
+				<Separator />
+				<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0">
+					<!-- Not editable metadata -->
+					{#each Object.entries(data.files[selectedIndex].stats) as [key, stat]}
+						<p>{key}</p>
+						<p>{stat}</p>
+					{/each}
+					<p>Episode Num</p>
+					<p>{data.files[selectedIndex].nfo.episode}</p>
+				</div>
 			</div>
-			<h1 class="text-lg font-bold pt-3">Stats</h1>
-			<Separator />
-			<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0">
-				<!-- Not editable metadata -->
-				{#each Object.entries(data.files[selectedIndex].stats) as [key, stat]}
-					<p>{key}</p>
-					<p>{stat}</p>
-				{/each}
-				<p>Episode Num</p>
-				<p>{data.files[selectedIndex].nfo.episode}</p>
-			</div>
-		{/if}
-	</div>
+		</div>
+	{/if}
 </div>
 
 <Popover title="Confirm Deletion" bind:open={deleteDialog}>
