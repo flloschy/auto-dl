@@ -6,6 +6,7 @@
 	import Icon from '$lib/ui/components/Icon.svelte';
 	import Separator from '$lib/ui/components/Separator.svelte';
 	import Toast from '$lib/ui/toast/Toast.svelte';
+	import "./background";
 </script>
 
 <header class="flex flex-col gap-y-1 h-100vh bg-background-950 p-2 w-[200px]">
