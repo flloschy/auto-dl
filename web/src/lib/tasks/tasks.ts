@@ -54,7 +54,7 @@ async function downloadFromYoutube(
 		process.on('close', () => {
 			const runtime = parseFloat(
 				execSync(
-					`ffprobe -i "../storage/podcast/${folder1}/${folder2 == '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'web'}" -show_entries format=duration -v quiet -of csv="p=0"`
+					`ffprobe -i "../storage/podcast/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'web'}" -show_entries format=duration -v quiet -of csv="p=0"`
 				).toString()
 			).toString();
 
