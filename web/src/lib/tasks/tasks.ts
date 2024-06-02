@@ -18,7 +18,7 @@ async function downloadFromYoutube(
 			'yt-dlp',
 			[
 				'-P',
-				`../storage/video/${folder1}/${folder2 == '' ? folder2 + '/' : ''}`,
+				`../storage/video/${folder1}/${folder2 != '' ? folder2 + '/' : ''}`,
 				'--output',
 				`[${id}]`,
 				'-f',
