@@ -15,7 +15,7 @@ async function downloadFromYoutube(
 ) {
 	return await new Promise((resolve, reject) => {
 		const process = spawn(
-			'ytdlp',
+			'yt-dlp',
 			[
 				'-P',
 				`../storage/video/${folder1}/${folder2 == '' ? folder2 + '/' : ''}`,
