@@ -18,4 +18,4 @@ RUN npm run build
 WORKDIR /app/web
 # run
 EXPOSE 3000
-CMD ["node", "build"]
+CMD ["cd", "/app/web/", "&&", "node", "build"]
