@@ -2,3 +2,4 @@
 /.vscode
 /web/.svelte-kit
 /web/node_modules
+/data/password
