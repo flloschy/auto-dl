@@ -78,7 +78,6 @@ export const actions = {
 				}
 			};
 		} catch (e) {
-			console.log(e);
 			return {
 				error: {
 					title: 'Playlist delete Failed',

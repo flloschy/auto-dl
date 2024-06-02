@@ -49,7 +49,6 @@ async function downloadFromYoutube(
 			progressReport(percent, humanFileSize(numCurrent), humanFileSize(numTotal));
 		});
 		process.stderr.on('data', (data) => {
-			console.log('stderr:', data.toString());
 			reject(data.toString());
 		});
 		process.on('close', () => {
@@ -635,7 +634,6 @@ export const syncAll: Action = async ({ request }) => {
 				await downloadFromSpotify(processes[i].url, processes[i].path, true)
 					.then(() => {})
 					.catch((e) => {
-						console.log(e);
 						failed++;
 					});
 			}

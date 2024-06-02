@@ -29,7 +29,6 @@ export const handle = async ({ event, resolve }) => {
 			});
 			return await resolve(event);
 		} else {
-			console.log('remove');
 			cookies.delete('session', {
 				path: '/'
 			});

@@ -121,7 +121,6 @@ export const actions = {
 				);
 				return aEpisodeNum - bEpisodeNum;
 			});
-		console.log(newOrder);
 		newOrder.forEach((v, i) =>
 			writeMetadata(
 				'podcastEpisode',
