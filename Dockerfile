@@ -8,11 +8,12 @@ RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
 RUN apt-get install -y ffmpeg
 RUN python3 -m pip install yt-dlp --break-system-packages
+RUN python3 -m pip install spotdl --break-system-packages
 
 # build
-COPY ./package.json ./package.json
+WORKDIR ./web
+COPY ./web .
 RUN npm i
-COPY . .
 RUN npm run build
 
 # run

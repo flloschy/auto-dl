@@ -1,13 +1,14 @@
-version: '3'
+version: "3.0"
 
 services:
   app:
-    container_name: 'autodl'
+    container_name: "autodlv4"
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - ./data:/app/data
+      - ./storage:/app/storage
     ports:
       - 3000:3000
-    restart: 'unless-stopped'
+    restart: "unless-stopped"
