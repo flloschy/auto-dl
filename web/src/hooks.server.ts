@@ -3,11 +3,12 @@ import { redirect } from '@sveltejs/kit';
 import { encrypt } from '$lib';
 
 const password = encrypt(readFileSync('../data/password', { encoding: 'utf-8' }).trim());
+const tryMkDir = (path:string) => {try {mkdirSync(path)} catch {/*empty*/} }
 
-mkdirSync("../storage")
-mkdirSync("../storage/music")
-mkdirSync("../storage/podcast")
-mkdirSync("../storage/video")
+tryMkDir("../storage")
+tryMkDir("../storage/music")
+tryMkDir("../storage/podcast")
+tryMkDir("../storage/video")
 
 export const handle = async ({ event, resolve }) => {
 	const cookies = event.cookies;
