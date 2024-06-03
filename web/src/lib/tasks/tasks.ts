@@ -388,6 +388,7 @@ export const downloadYoutubePlaylist: Action = async ({ request, params }) => {
 					(percent, current, total) => {
 						task.status.update((s) => ({
 							...s,
+							progress: percent,
 							detail: `${i + 1}/${ids.length} | ${current} of ${total} | ${title} | (${failed} failed)`
 						}));
 					},
