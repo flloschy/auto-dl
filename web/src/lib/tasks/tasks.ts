@@ -6,7 +6,6 @@ import { broadcast } from '$lib/broadcaster';
 import { execSync, spawn } from 'node:child_process';
 import { NFODateFormatter, humanFileSize } from '$lib/frontendUtil';
 import type { EpisodeNFO, SeasonNFO, ShowNFO } from '$lib/types';
-import { spawnSync } from 'child_process';
 async function downloadFromYoutube(
 	folder1: string,
 	folder2: string,
@@ -52,27 +51,14 @@ async function downloadFromYoutube(
 		process.stderr.on('data', (data) => {
 			reject(data.toString());
 		});
-		process.on('close', async () => {
-			console.log
-			await new Promise((res, rej) => {
-				const probe = spawn(
-					"ffprobe",
-					[
-						"-i",
-						`../storage/video/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'web'}`,
-						// "-show_entries",
-						// "format=duration",
-						// "-v",
-						// "quiet",
-						// "-of",
-						// 'csv="p-0"'
-					]
-				)
-				probe.stderr.on("data", (e) => console.log("err: ", e.toString()))
-				probe.stdout.on("data", (e) => console.log("out: ", e.toString()))
-				probe.on("error", (e) => rej(console.log("ERROR:\n" + e.toString())))
-				probe.on("close", (e) => res(console.log("CLOSE:\n" + e.toString())))
-			}).then().catch()
+		process.on('close', () => {
+			const runtime = parseFloat(
+				execSync(
+					`ffprobe -i "../storage/video/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}" -show_entries format=duration -v quiet -of csv="p=0"`
+				).toString()
+			).toString();
+
+			resolve(runtime);
 		});
 	});
 }
