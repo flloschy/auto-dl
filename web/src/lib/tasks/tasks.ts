@@ -53,18 +53,19 @@ async function downloadFromYoutube(
 			reject(data.toString());
 		});
 		process.on('close', async () => {
+			console.log
 			await new Promise((res, rej) => {
 				const probe = spawn(
 					"ffprobe",
 					[
 						"-i",
 						`../storage/video/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'web'}`,
-						"-show_entries",
-						"format=duration",
-						"-v",
-						"quiet",
-						"-of",
-						'csv="p-0"'
+						// "-show_entries",
+						// "format=duration",
+						// "-v",
+						// "quiet",
+						// "-of",
+						// 'csv="p-0"'
 					]
 				)
 				probe.stderr.on("data", (e) => console.log("err: ", e))
