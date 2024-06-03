@@ -68,10 +68,10 @@ async function downloadFromYoutube(
 						// 'csv="p-0"'
 					]
 				)
-				probe.stderr.on("data", (e) => console.log("err: ", e))
-				probe.stdout.on("data", (e) => console.log("out: ", e))
-				probe.on("error", (e) => rej(console.log("ERROR:\n" + e)))
-				probe.on("close", (e) => res(console.log("CLOSE:\n" + e)))
+				probe.stderr.on("data", (e) => console.log("err: ", e.toString()))
+				probe.stdout.on("data", (e) => console.log("out: ", e.toString()))
+				probe.on("error", (e) => rej(console.log("ERROR:\n" + e.toString())))
+				probe.on("close", (e) => res(console.log("CLOSE:\n" + e.toString())))
 			}).then().catch()
 		});
 	});
