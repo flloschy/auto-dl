@@ -4,7 +4,7 @@ WORKDIR /app
 
 # requirement
 RUN apt-get update
-RUN apt-get install -y python3 python3-pip ffmpeg ffprobe
+RUN apt-get install -y python3 python3-pip ffmpeg
 RUN python3 -m pip install yt-dlp spotdl --break-system-packages
 
 # build
