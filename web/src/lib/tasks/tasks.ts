@@ -5,7 +5,19 @@ import type { Action } from '@sveltejs/kit';
 import { broadcast } from '$lib/broadcaster';
 import { execSync, spawn } from 'node:child_process';
 import { NFODateFormatter, humanFileSize } from '$lib/frontendUtil';
-import type { EpisodeNFO, SeasonNFO, ShowNFO } from '$lib/types';
+import type { EpisodeNFO, PodcastEpisodeNFO, SeasonNFO, ShowNFO } from '$lib/types';
+
+async function getDuration(folder1:string, folder2:string, id:string, audioOnly:boolean) {
+	const runtime = parseFloat(
+		execSync(
+			`ffprobe -i "../storage/video/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}" -show_entries format=duration -v quiet -of csv="p=0"`
+		).toString()
+	)
+	let date = new Date(0)
+	date.setSeconds(Math.round(runtime))
+	return date.toISOString().substring(11, 19);
+}
+
 async function downloadFromYoutube(
 	folder1: string,
 	folder2: string,
@@ -52,13 +64,8 @@ async function downloadFromYoutube(
 			reject(data.toString());
 		});
 		process.on('close', () => {
-			const runtime = parseFloat(
-				execSync(
-					`ffprobe -i "../storage/video/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}" -show_entries format=duration -v quiet -of csv="p=0"`
-				).toString()
-			).toString();
 
-			resolve(runtime);
+			resolve(getDuration(folder1, folder2, id, audioOnly));
 		});
 	});
 }
@@ -190,7 +197,7 @@ export const fixNFO: Action = async ({ request }) => {
 					detail: `Working on ${operation.show}${operation.season ? '/' + operation.season : ''}${operation.episode ? '/' + operation.episode : ''}`
 				}));
 
-				const overwrite: Partial<EpisodeNFO | SeasonNFO | ShowNFO> = {};
+				const overwrite: Partial<EpisodeNFO | SeasonNFO | ShowNFO | PodcastEpisodeNFO> = {};
 				if (operation.type == 'episode' || operation.type == 'podcastEpisode') {
 					try {
 						const nfo = getMetadata('episode', operation.show, operation.season, operation.episode);
