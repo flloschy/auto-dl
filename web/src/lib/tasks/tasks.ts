@@ -19,7 +19,8 @@ function getDuration(folder1:string, folder2:string, id:string, audioOnly:boolea
 		return date.toISOString().substring(11, 19);
 	}
 	catch (e){
-		console.log(e)
+		console.log("STDOUT: " + e.stdout.toString())
+		console.log("STDERR: " + e.stderr.toString())
 		return "00:00:00"
 	}
 }
@@ -64,6 +65,7 @@ async function downloadFromYoutube(
 			}
 		);
 		process.stdout.on('data', (data) => {
+			console.log("DATA: " + data.toString())
 			const stringData = data.toString() as string;
 			const [current, total] = stringData.split(' / ');
 			const numCurrent = parseInt(current);
@@ -73,9 +75,11 @@ async function downloadFromYoutube(
 			progressReport(percent, humanFileSize(numCurrent), humanFileSize(numTotal));
 		});
 		process.stderr.on('data', (data) => {
+			console.log("ERROR: ", data.toString())
 			reject(data.toString());
 		});
 		process.on('close', async () => {
+			console.log("CLOSE")
 			resolve(getDuration(folder1, folder2, id, audioOnly));
 		});
 	});
