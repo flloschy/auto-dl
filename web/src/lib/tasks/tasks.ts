@@ -33,13 +33,13 @@ async function downloadFromYoutube(
 ) {
 	const params = 			[
 		'-P',
-		`../storage/${audioOnly ? "podcast" : "video"}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}`,
+		`"../storage/${audioOnly ? "podcast" : "video"}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}"`,
 		'--output',
-		`[${id}]`,
+		`"[${id}]"`,
 		'-f',
-		audioOnly ? `ba[ext=mp3]` : `bestvideo[ext=webm]+bestaudio[ext=webm]/best[ext=webm]/best`,
+		audioOnly ? `"ba[ext=mp3]"` : `"bestvideo[ext=webm]+bestaudio[ext=webm]/best[ext=webm]/best"`,
 		'--progress-template',
-		`%(progress.downloaded_bytes)s / %(progress.total_bytes)s`,
+		`"%(progress.downloaded_bytes)s / %(progress.total_bytes)s"`,
 		'--sponsorblock-mark',
 		'all',
 		'--write-info-json ',
