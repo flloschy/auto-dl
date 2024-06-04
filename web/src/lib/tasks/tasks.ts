@@ -673,7 +673,7 @@ export const downloadPodcastVideo: Action = async ({ request, params }) => {
 	const data = await request.formData();
 	const toastId = data.get('toastId') as string;
 	const youtubemetadataid = data.get('youtubemetadataid') as string;
-	let title: string;
+	let title: string = "?";
 
 	pushTask(
 		'Downloading',
@@ -686,13 +686,6 @@ export const downloadPodcastVideo: Action = async ({ request, params }) => {
 			try {
 				title = await getTitle(youtubemetadataid);
 			} catch (e) {
-				task.status.update((s) => ({
-					...s,
-					finished: Date.now(),
-					detail: (e as { message: string }).message,
-					title: 'Downloading Failed',
-					state: 'error'
-				}));
 			}
 
 			task.status.update((s) => ({
@@ -820,6 +813,7 @@ export const downloadPodcastPlaylist: Action = async ({ request, params }) => {
 					true
 				)
 					.then((runtime) => {
+						console.log("DOWNLOAD FROM YOUTUBE DONE (THEN): RUNTIME -> " + runtime)
 						task.status.update((s) => ({
 							...s,
 							state: 'running',
@@ -836,7 +830,7 @@ export const downloadPodcastPlaylist: Action = async ({ request, params }) => {
 								youtubemetadataid: id,
 								runtime: runtime as string
 							},
-							params.podcastEpisode as string,
+							params.podcastFolder as string,
 							`[${id}].mp3`
 						);
 
