@@ -58,7 +58,10 @@ async function downloadFromYoutube(
 	return await new Promise((resolve, reject) => {
 		const process = spawn(
 			'yt-dlp',
-			params
+			params, {
+				uid:1000,
+				gid:1000,
+			}
 		);
 		process.stdout.on('data', (data) => {
 			const stringData = data.toString() as string;
