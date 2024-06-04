@@ -8,35 +8,19 @@ import { NFODateFormatter, humanFileSize } from '$lib/frontendUtil';
 import type { EpisodeNFO, PodcastEpisodeNFO, SeasonNFO, ShowNFO } from '$lib/types';
 
 async function getDuration(folder1:string, folder2:string, id:string, audioOnly:boolean) {
-	return await new Promise((resolve, reject) => {
-		const runtime = spawn(
-			"ffprobe",
-			[
+		const runtime = execSync(
+			"ffprobe" + [
 				"-i",
 				`"../storage/${audioOnly ? 'podcast' : 'video'}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}"`,
 				"-show_entries",
 				"format=duration",
 				"-v", "quiet",
 				"-of",  'csv="p=0"'
-			]
+			].join(" ")
 		)
-
-		runtime.stdout.on("data", (data) => {
-			console.log("STDOUT DATA: " + data.toString())
-			let date = new Date(0)
-			date.setSeconds(Math.round(parseFloat(data.toString())))
-			resolve(date.toISOString().substring(11, 19));
-		})
-		runtime.stderr.on("data", (data) => {
-			console.log("STDERR DATA: " + data.toString())
-			reject("00:00:00")
-		})
-		runtime.on("error", (data) => {
-			console.log("ERROR")
-			console.log(data)
-			reject("00:00:00")
-		})
-	}).then(v => v).catch(v => v)
+		const time = new Date(0)
+		time.setSeconds(parseFloat(runtime.toString()))
+		return time.toISOString().substring(11, 19)
 }
 
 async function downloadFromYoutube(
@@ -46,7 +30,7 @@ async function downloadFromYoutube(
 	progressReport: (percent: number, currentSize: string, totalSize: string) => void,
 	audioOnly: boolean = false
 ) {
-	const params = 			[
+	const params = [
 		'-P',
 		`../storage/${audioOnly ? "podcast" : "video"}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}`,
 		'--output',
