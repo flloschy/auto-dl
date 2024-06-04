@@ -25,6 +25,8 @@ async function downloadFromYoutube(
 	progressReport: (percent: number, currentSize: string, totalSize: string) => void,
 	audioOnly: boolean = false
 ) {
+
+	console.log("dowloading: " + id);
 	return await new Promise((resolve, reject) => {
 		const process = spawn(
 			'yt-dlp',
@@ -64,7 +66,6 @@ async function downloadFromYoutube(
 			reject(data.toString());
 		});
 		process.on('close', () => {
-
 			resolve(getDuration(folder1, folder2, id, audioOnly));
 		});
 	});
