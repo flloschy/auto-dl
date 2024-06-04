@@ -42,7 +42,7 @@ async function downloadFromYoutube(
 		`"%(progress.downloaded_bytes)s / %(progress.total_bytes)s"`,
 		'--sponsorblock-mark',
 		'all',
-		'--write-info-json ',
+		// '--write-info-json ',
 		'--progress',
 		'--newline',
 		'--embed-chapters',
