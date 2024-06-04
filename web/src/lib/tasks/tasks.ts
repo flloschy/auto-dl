@@ -52,7 +52,7 @@ async function downloadFromYoutube(
 		'--output',
 		`"[${id}]"`,
 		'-f',
-		audioOnly ? `"ba"` : `"b"`,
+		audioOnly ? `ba` : `b`,
 		'--progress-template',
 		`"%(progress.downloaded_bytes)s / %(progress.total_bytes)s"`,
 		'--sponsorblock-mark',
