@@ -10,7 +10,7 @@ import type { EpisodeNFO, PodcastEpisodeNFO, SeasonNFO, ShowNFO } from '$lib/typ
 async function getDuration(folder1:string, folder2:string, id:string, audioOnly:boolean) {
 	const runtime = parseFloat(
 		execSync(
-			`ffprobe -i "../storage/video/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}" -show_entries format=duration -v quiet -of csv="p=0"`
+			`ffprobe -i "../storage/${audioOnly ? 'podcast' : 'video'}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}" -show_entries format=duration -v quiet -of csv="p=0"`
 		).toString()
 	)
 	let date = new Date(0)
