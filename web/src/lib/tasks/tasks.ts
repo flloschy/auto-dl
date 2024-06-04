@@ -7,22 +7,36 @@ import { execSync, spawn } from 'node:child_process';
 import { NFODateFormatter, humanFileSize } from '$lib/frontendUtil';
 import type { EpisodeNFO, PodcastEpisodeNFO, SeasonNFO, ShowNFO } from '$lib/types';
 
-function getDuration(folder1:string, folder2:string, id:string, audioOnly:boolean) {
-	try {
-		const runtime = parseFloat(
-			execSync(
-				`ffprobe -i "../storage/${audioOnly ? 'podcast' : 'video'}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}" -show_entries format=duration -v quiet -of csv="p=0"`
-			).toString()
+async function getDuration(folder1:string, folder2:string, id:string, audioOnly:boolean) {
+	return await new Promise((resolve, reject) => {
+		const runtime = spawn(
+			"ffprobe",
+			[
+				"-i",
+				`"../storage/${audioOnly ? 'podcast' : 'video'}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}"`,
+				"-show_entries",
+				"format=duration",
+				"-v", "quiet",
+				"-of",  'csv="p=0"'
+			]
 		)
-		let date = new Date(0)
-		date.setSeconds(Math.round(runtime))
-		return date.toISOString().substring(11, 19);
-	}
-	catch (e){
-		console.log("STDOUT: " + e.stdout.toString())
-		console.log("STDERR: " + e.stderr.toString())
-		return "00:00:00"
-	}
+
+		runtime.stdout.on("data", (data) => {
+			console.log("STDOUT DATA: " + data.toString())
+			let date = new Date(0)
+			date.setSeconds(Math.round(parseFloat(data.toString())))
+			resolve(date.toISOString().substring(11, 19));
+		})
+		runtime.stderr.on("data", (data) => {
+			console.log("STDERR DATA: " + data.toString())
+			reject("00:00:00")
+		})
+		runtime.on("error", (data) => {
+			console.log("ERROR")
+			console.log(data)
+			reject("00:00:00")
+		})
+	}).then(v => v).catch(v => v)
 }
 
 async function downloadFromYoutube(
@@ -80,7 +94,7 @@ async function downloadFromYoutube(
 		});
 		process.on('close', async () => {
 			console.log("CLOSE")
-			resolve(getDuration(folder1, folder2, id, audioOnly));
+			resolve(await getDuration(folder1, folder2, id, audioOnly));
 		});
 	});
 }
