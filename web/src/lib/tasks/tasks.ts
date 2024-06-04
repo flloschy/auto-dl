@@ -765,7 +765,8 @@ export const downloadPodcastPlaylist: Action = async ({ request, params }) => {
 				ids = output
 					.split('\n')
 					.map((line) => line.trim())
-					.filter((id) => id);
+					.filter((id) => id)
+					.filter(id => !id.includes(" "));
 			} catch {
 				return false;
 			}
