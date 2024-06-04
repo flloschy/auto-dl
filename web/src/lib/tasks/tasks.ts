@@ -7,15 +7,21 @@ import { execSync, spawn } from 'node:child_process';
 import { NFODateFormatter, humanFileSize } from '$lib/frontendUtil';
 import type { EpisodeNFO, PodcastEpisodeNFO, SeasonNFO, ShowNFO } from '$lib/types';
 
-async function getDuration(folder1:string, folder2:string, id:string, audioOnly:boolean) {
-	const runtime = parseFloat(
-		execSync(
-			`ffprobe -i "../storage/${audioOnly ? 'podcast' : 'video'}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}" -show_entries format=duration -v quiet -of csv="p=0"`
-		).toString()
-	)
-	let date = new Date(0)
-	date.setSeconds(Math.round(runtime))
-	return date.toISOString().substring(11, 19);
+function getDuration(folder1:string, folder2:string, id:string, audioOnly:boolean) {
+	try {
+		const runtime = parseFloat(
+			execSync(
+				`ffprobe -i "../storage/${audioOnly ? 'podcast' : 'video'}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}" -show_entries format=duration -v quiet -of csv="p=0"`
+			).toString()
+		)
+		let date = new Date(0)
+		date.setSeconds(Math.round(runtime))
+		return date.toISOString().substring(11, 19);
+	}
+	catch (e){
+		console.log(e)
+		return "00:00:00"
+	}
 }
 
 async function downloadFromYoutube(
@@ -27,7 +33,7 @@ async function downloadFromYoutube(
 ) {
 	const params = 			[
 		'-P',
-		`../storage/${audioOnly ?"podcast" :"video"}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}`,
+		`../storage/${audioOnly ? "podcast" : "video"}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}`,
 		'--output',
 		`[${id}]`,
 		'-f',
@@ -36,9 +42,7 @@ async function downloadFromYoutube(
 		`%(progress.downloaded_bytes)s / %(progress.total_bytes)s`,
 		'--sponsorblock-mark',
 		'all',
-		'--sponsorblock-remove',
-		'sponsor',
-		'--clean-info-json',
+		'--write-info-json ',
 		'--progress',
 		'--newline',
 		'--embed-chapters',
@@ -47,7 +51,7 @@ async function downloadFromYoutube(
 		audioOnly ? '--extract-audio' : '',
 		`https://youtu.be/${id}`
 	].filter((i) => i != '')
-	console.log("dowloading: " + id + "\n--> " + params);
+	console.log("dowloading: " + id + "\n--> " + params.join(" "));
 	return await new Promise((resolve, reject) => {
 		const process = spawn(
 			'yt-dlp',
@@ -65,7 +69,7 @@ async function downloadFromYoutube(
 		process.stderr.on('data', (data) => {
 			reject(data.toString());
 		});
-		process.on('close', () => {
+		process.on('close', async () => {
 			resolve(getDuration(folder1, folder2, id, audioOnly));
 		});
 	});
@@ -767,7 +771,7 @@ export const downloadPodcastPlaylist: Action = async ({ request, params }) => {
 					.split('\n')
 					.map((line) => line.trim())
 					.filter((id) => id)
-					.filter(id => !id.includes(" "));
+					.filter(id => id.length == 11);
 			} catch {
 				return false;
 			}
