@@ -9,7 +9,7 @@ import type { EpisodeNFO, PodcastEpisodeNFO, SeasonNFO, ShowNFO } from '$lib/typ
 
 async function getDuration(folder1:string, folder2:string, id:string, audioOnly:boolean) {
 		const runtime = execSync(
-			"ffprobe" + [
+			"ffprobe " + [
 				"-i",
 				`"../storage/${audioOnly ? 'podcast' : 'video'}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}[${id}].${audioOnly ? 'mp3' : 'webm'}"`,
 				"-show_entries",
