@@ -37,7 +37,7 @@ async function downloadFromYoutube(
 		'--output',
 		`"[${id}]"`,
 		'-f',
-		audioOnly ? `"ba[ext=mp3]"` : `"bestvideo[ext=webm]+bestaudio[ext=webm]/best[ext=webm]/best"`,
+		audioOnly ? `"ba"` : `"b"`,
 		'--progress-template',
 		`"%(progress.downloaded_bytes)s / %(progress.total_bytes)s"`,
 		'--sponsorblock-mark',
@@ -48,6 +48,9 @@ async function downloadFromYoutube(
 		'--embed-chapters',
 		'--embed-metadata',
 		'--quiet',
+		"-x",
+		audioOnly ? "--audio-format" : "--recode-video",
+		audioOnly ? "mp3" : "webm",
 		audioOnly ? '--extract-audio' : '',
 		`https://youtu.be/${id}`
 	].filter((i) => i != '')
