@@ -25,33 +25,33 @@ async function downloadFromYoutube(
 	progressReport: (percent: number, currentSize: string, totalSize: string) => void,
 	audioOnly: boolean = false
 ) {
-
-	console.log("dowloading: " + id);
+	const params = 			[
+		'-P',
+		`../storage/${audioOnly ?"podcast" :"video"}/${folder1}/${folder2 != '' ? folder2 + '/' : ''}`,
+		'--output',
+		`[${id}]`,
+		'-f',
+		audioOnly ? `ba[ext=mp3]` : `bestvideo[ext=webm]+bestaudio[ext=webm]/best[ext=webm]/best`,
+		'--progress-template',
+		`%(progress.downloaded_bytes)s / %(progress.total_bytes)s`,
+		'--sponsorblock-mark',
+		'all',
+		'--sponsorblock-remove',
+		'sponsor',
+		'--clean-info-json',
+		'--progress',
+		'--newline',
+		'--embed-chapters',
+		'--embed-metadata',
+		'--quiet',
+		audioOnly ? '--extract-audio' : '',
+		`https://youtu.be/${id}`
+	].filter((i) => i != '')
+	console.log("dowloading: " + id + "\n--> " + params);
 	return await new Promise((resolve, reject) => {
 		const process = spawn(
 			'yt-dlp',
-			[
-				'-P',
-				`../storage/video/${folder1}/${folder2 != '' ? folder2 + '/' : ''}`,
-				'--output',
-				`[${id}]`,
-				'-f',
-				audioOnly ? `ba[ext=mp3]` : `bestvideo[ext=webm]+bestaudio[ext=webm]/best[ext=webm]/best`,
-				'--progress-template',
-				`%(progress.downloaded_bytes)s / %(progress.total_bytes)s`,
-				'--sponsorblock-mark',
-				'all',
-				'--sponsorblock-remove',
-				'sponsor',
-				'--clean-info-json',
-				'--progress',
-				'--newline',
-				'--embed-chapters',
-				'--embed-metadata',
-				'--quiet',
-				audioOnly ? '--extract-audio' : '',
-				`https://youtu.be/${id}`
-			].filter((i) => i != '')
+			params
 		);
 		process.stdout.on('data', (data) => {
 			const stringData = data.toString() as string;
