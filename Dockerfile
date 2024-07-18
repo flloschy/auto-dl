@@ -1,7 +1,5 @@
 # setup
 FROM node:20.11.1
-RUN chown newuser /app
-USER newuser
 WORKDIR /app
 
 # requirement
