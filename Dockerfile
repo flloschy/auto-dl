@@ -1,5 +1,7 @@
 # setup
 FROM node:20.11.1
+RUN chown newuser /app
+USER newuser
 WORKDIR /app
 
 # requirement
@@ -16,4 +18,4 @@ RUN npm run build
 
 # run
 EXPOSE 3000
-CMD ["sudo", "node", "build"]
+CMD ["node", "build"]
