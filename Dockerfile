@@ -16,4 +16,4 @@ RUN npm run build
 
 # run
 EXPOSE 3000
-CMD ["node", "build"]
+CMD ["sudo", "node", "build"]
