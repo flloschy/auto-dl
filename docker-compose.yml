@@ -6,8 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./data:/app/data
-      - ./storage:/app/storage
+      - ./downloads:/app/downloads
     ports:
       - 3000:3000
     restart: 'unless-stopped'
