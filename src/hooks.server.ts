@@ -1,17 +1,16 @@
-import { mkdirSync, readFileSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync } from 'fs';
 import { redirect } from '@sveltejs/kit';
 import Logger from '$lib/logger';
 const logger = Logger.getLogger("auth")
 
 const password = readFileSync("./PASSWORD").toString().trim()
 const tryMkDir = (path:string) => {
-	logger.debug("Attempting to create", path)
-	try {
-		mkdirSync(path)
-		logger.debug("Created path", path)
-	} catch {
-		logger.debug("Path already exists", path)
+	if (existsSync(path)) {
+		logger.debug("Attempting to create", path, "but already exists")
+		return
 	}
+	logger.debug("Created", path)
+	mkdirSync(path)
 }
 
 logger.info("The active password is:", password)
