@@ -8,7 +8,6 @@ RUN apt-get install -y python3 python3-pip ffmpeg
 RUN python3 -m pip install yt-dlp spotdl --break-system-packages
 
 # build
-WORKDIR /app/web
 COPY package.json ./package.json
 RUN npm i
 COPY . .
