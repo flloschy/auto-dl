@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import Logger from '$lib/logger';
 const logger = Logger.getLogger("auth")
 
-const password = readFileSync("./PASSWORD").toString()
+const password = readFileSync("./PASSWORD").toString().trim()
 const tryMkDir = (path:string) => {
 	logger.debug("Attempting to create", path)
 	try {
@@ -14,7 +14,7 @@ const tryMkDir = (path:string) => {
 	}
 }
 
-logger.info("The active password is", password)
+logger.info("The active password is:", password)
 
 
 tryMkDir("./downloads")
@@ -38,7 +38,7 @@ export const handle = async ({ event, resolve }) => {
 	const session = cookies.get('session');
 	if (session) {
 		logger.debug("session exists")
-		if (password == session) {
+		if (password == session.trim()) {
 			logger.debug("Correct passoword")
 			const expires = new Date(Date.now() + 2629800000); // 1 month in MS
 			cookies.set('session', password, {
