@@ -1,8 +1,6 @@
-version: "3.0"
-
 services:
   app:
-    container_name: "autodlv4"
+    container_name: 'autodlv5'
     user: 1000:1000
     build:
       context: .
@@ -12,4 +10,4 @@ services:
       - ./storage:/app/storage
     ports:
       - 3000:3000
-    restart: "unless-stopped"
+    restart: 'unless-stopped'

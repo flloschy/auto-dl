@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: "Courier Prime", monospace;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    padding: 3rem;
+}
+
+@media screen and (max-width: 300px) {
+    body {
+        padding: 1rem;
+    }
+}
+
+
+:root {
+    --background: #262626;
+    --text: #F2F2F2;
+    --primary: #2484BF;
+    --secondary: #275673;
+    --accent: #41AED9;
+    --width: 500px
+}
