@@ -32,6 +32,7 @@ async function getVideoTitle(id: string) {
 export async function getYoutubePlaylistIds(playlistId: string) {
     return execSync(`yt-dlp --flat-playlist --print id "${playlistId}"`).toString().split('\n')
     .map((line) => line.trim())
+    .filter(id => id.length < 13)
     .filter((id) => id);
 }
 
