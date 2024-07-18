@@ -9,7 +9,7 @@ RUN python3 -m pip install yt-dlp spotdl --break-system-packages
 
 # build
 WORKDIR /app/web
-COPY .package.json ./package.json
+COPY package.json ./package.json
 RUN npm i
 COPY . .
 RUN npm run build
