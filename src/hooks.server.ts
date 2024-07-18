@@ -4,6 +4,8 @@ import { redirect } from '@sveltejs/kit';
 const password = readFileSync("./PASSWORD")
 const tryMkDir = (path:string) => {try {mkdirSync(path)} catch {/*empty*/} }
 
+console.log("password: " + password)
+
 tryMkDir("./downloads")
 tryMkDir("./downloads/music")
 tryMkDir("./downloads/podcast")
