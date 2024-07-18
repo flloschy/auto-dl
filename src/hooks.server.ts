@@ -1,7 +1,7 @@
-import { mkdirSync } from 'fs';
+import { mkdirSync, readFileSync } from 'fs';
 import { redirect } from '@sveltejs/kit';
 
-const password = "SET YOUR PASSWORD HERE"
+const password = readFileSync("./PASSWORD")
 const tryMkDir = (path:string) => {try {mkdirSync(path)} catch {/*empty*/} }
 
 tryMkDir("./downloads")
