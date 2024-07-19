@@ -159,8 +159,13 @@ export class Season {
         if (!id) return
         const result = await downloadYoutubeVideo(handler, this.show.name, this.name, link)
         if (!result) return
-        const episode = new Episode(this.show, this, result.filename)
-        await episode.edit({title: result.videoTitle, youtubemetadataid: id})
+        const a = new Episode(this.show, this, result.filename + ".mp4")
+        if (!a.exists) {
+            const b = new Episode(this.show, this, result.filename + ".webm")
+        await b.edit({title: result.videoTitle, youtubemetadataid: id})
+
+        }
+        await a.edit({title: result.videoTitle, youtubemetadataid: id})
     }
 
 }
