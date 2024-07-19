@@ -1,5 +1,3 @@
-
-
 export interface ShowNFO {
 	title: string;
 	originaltitle: string;
