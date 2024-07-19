@@ -138,7 +138,7 @@ export class Season {
     episodes() {
         if (this.episodes_.length != 0) return this.episodes_
         const files = readdirSync(`./downloads/video/${this.show.name}/${this.name}`, {withFileTypes:true})
-        const videos = files.filter(v => v.isFile() && v.name.endsWith(".webm"))
+        const videos = files.filter(v => v.isFile() && !v.name.endsWith("nfo") && !v.name.endsWith("json"))
         this.episodes_ = videos.map(v => new Episode(this.show, this, v.name))
         return this.episodes_
     }

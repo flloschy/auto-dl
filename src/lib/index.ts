@@ -72,7 +72,6 @@ export async function downloadYoutubeVideo(handler: ExecutionHandler, show: stri
         '--embed-chapters',
         '--embed-metadata',
         '--quiet', // dont log anything else
-        "--recode-video", "webm", // reformat to webm
         `https://youtu.be/${id}`
     ].filter(x => x != "");
 
@@ -122,11 +121,6 @@ export async function downloadYoutubeVideo(handler: ExecutionHandler, show: stri
                     "downloading",
                     {message: "done", color: messageColors.green},
                 ])
-                handler.log([
-                    {message: `{${id}}`, color: messageColors.yellow},
-                    "recoding video to webm",
-                    {message: "This process does not have progress reporting", color: messageColors.white}
-                ])
             }
         });
         // process.stderr.on('data', (data) => {
@@ -156,7 +150,7 @@ export async function downloadYoutubeVideo(handler: ExecutionHandler, show: stri
         {message: `${result}`, color: messageColors.cyan},
     ])
 
-    return {filename: `[${id}].webm`,
+    return {filename: `[${id}]`,
         videoTitle: title}
 }
 export async function downloadYoutubeVideoPlaylist(handler: ExecutionHandler, show: string, season: string, link: string) {

@@ -23,7 +23,7 @@ export class Episode {
         this.name = episode
         this.exists = existsSync(`./downloads/video/${this.show.name}/${this.season.name}/${this.name}`)
 
-        const title = this.name.replaceAll("[", "").replaceAll("]", "").replace(".webm", "")
+        const title = this.name.replaceAll("[", "").replaceAll("]", "").split(".")[0]
         this.metadata = {
             dateadded: NFODateFormatter(this.exists ? pathAge(`./downloads/video/${this.show.name}/${this.season.name}/${this.name}`) : 0),
             originaltitle: this.name,
@@ -32,7 +32,16 @@ export class Episode {
             aired: NFODateFormatter(new Date()),
             runtime: "00:00:00",
             youtubemetadataid: title,
-            episode: (readdirSync(`./downloads/video/${this.show.name}/${this.season.name}/`, {withFileTypes: true}).filter(d => d.isFile() && d.name.endsWith(".webm") && !d.name.includes("temp") && !d.name.includes("tmp")).length+1).toString()
+            episode: (
+                readdirSync(`./downloads/video/${this.show.name}/${this.season.name}/`, {withFileTypes: true})
+                .filter(d => 
+                    d.isFile() && 
+                    !d.name.endsWith("nfo") && 
+                    !d.name.endsWith("json") && 
+                    !d.name.includes("temp") &&
+                    !d.name.includes("tmp"))
+                .length+1)
+                .toString()
         }
         this.load()
     }
@@ -103,6 +112,10 @@ export class Episode {
             force: true,
             recursive: true
         })
+        rmSync(`${segments.path}/${segments.fileName}.mp4`, {
+            force: true,
+            recursive: true
+        })
         rmSync(`${segments.path}/${segments.fileName}.nfo`, {
             force: true,
             recursive: true
@@ -165,7 +178,11 @@ const selectEpisode = new ArgumentBuilder<Episode>()
         return limitArrayLengthToX(
             sortWithLevenshtein(
                 readdirSync(`./downloads/video/${show.name}/${season.name}`, {withFileTypes: true})
-                    .filter(dir => dir.isFile() && dir.name.endsWith(".webm"))
+                    .filter(dir => 
+                        dir.isFile() && 
+                        !dir.name.endsWith("nfo") &&
+                        !dir.name.endsWith("json")
+                    )
                     .map(dir => dir.name),
                 ept.name
             ),

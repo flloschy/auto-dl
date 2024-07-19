@@ -115,7 +115,7 @@ export function readEpisodeNFO(show: string, season: string, episode: string): E
 
 
     const folders = readdirSync(`./downloads/youtube/${show}/${season}`, {withFileTypes: true})
-	const files = folders.filter(entry => entry.isFile() && entry.name.endsWith(".webm"))
+	const files = folders.filter(entry => entry.isFile() && !entry.name.endsWith("nfo") && !entry.name.endsWith("json"))
     let episodeNum = files.length
 
 	for (let index = 0; index < files.length; index++) {
